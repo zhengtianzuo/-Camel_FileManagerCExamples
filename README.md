@@ -52,3 +52,11 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelCrashReportTest/show1.jpg?raw=true)
 异常崩溃时生成的dump文件, 在VisualStudio下调试直接定位到代码行, 当然也可以使用WinDbg调试
+
+***
+
+计划加入的工程:
+1. CamelFileManagerCTest: 文件管理开发组件测试程序
+2. DataManager: CamelFileManagerC数据库的可视化开发工具
+3. QmlSkins: Qml全局动态换肤
+4. SilkConfig: Silk配置管理程序
