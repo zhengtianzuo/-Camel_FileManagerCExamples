@@ -57,6 +57,6 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 
 计划加入的工程:
 1. CamelFileManagerCTest: 文件管理开发组件测试程序
-2. DataManager: CamelFileManagerC数据库的可视化开发工具
+2. CamelDataManager: CamelFileManagerC数据库的可视化开发工具
 3. QmlSkins: Qml全局动态换肤
 4. SilkConfig: Silk配置管理程序
