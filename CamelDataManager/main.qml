@@ -72,10 +72,16 @@ ApplicationWindow {
         }
 
         TabBar {
+            property int lastIndex: 0
+
             id: bar
-            height: 48
-            width: 48*myModel.count
+            height: 64
+            width: 64*myModel.count
             currentIndex: 0
+            Component.onCompleted: {
+                repeater.itemAt(bar.lastIndex).imageSource = myModel.get(bar.lastIndex).modelSrcG;
+                repeater.itemAt(bar.lastIndex).textColor = "#4040ff";
+            }
 
             ListModel {
                 id: myModel
@@ -86,23 +92,43 @@ ApplicationWindow {
             }
 
             Repeater {
+                id: repeater
                 model: myModel
 
                 TabButton {
+                    property alias imageSource: image.source
+                    property alias textColor: text.color
+
                     height: bar.height
                     contentItem:Text{
+                        id: text
                         text: modelText
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignBottom
                         font.family: "Microsoft YaHei"
                         font.pixelSize: 15
-                        color: (model.index === bar.currentIndex) ? "#148014" : "#000000"
+                        color: "#148014"
                     }
                     background:Image{
-                        width: 24
-                        height: 24
+                        id: image
+                        width: 32
+                        height: 32
                         anchors.horizontalCenter: parent.horizontalCenter
-                        source: (model.index === bar.currentIndex) ? modelSrcG : modelSrc
+                        source: modelSrc
+                    }
+                    onHoveredChanged: {
+                        if (model.index !== bar.currentIndex){
+                            hovered ? text.color = "#4040ff" : text.color = "#148014"
+                            hovered ? image.source = modelSrcG : image.source = modelSrc
+                        }
+                    }
+                    onClicked: {
+                        repeater.itemAt(bar.lastIndex).imageSource = myModel.get(bar.lastIndex).modelSrc;
+                        repeater.itemAt(bar.lastIndex).textColor = "#148014";
+
+                        image.source = modelSrcG;
+                        text.color = "#4040ff";
+                        bar.lastIndex = model.index;
                     }
                 }
             }

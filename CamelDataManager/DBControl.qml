@@ -17,8 +17,8 @@ Rectangle {
 
         TabBar {
             id: bar
-            height: 48
-            width: 48*myModel.count
+            height: 64
+            width: 64*myModel.count
             currentIndex: 0
 
             ListModel {
@@ -36,16 +36,18 @@ Rectangle {
                 TabButton {
                     height: bar.height
                     contentItem:Text{
+                        id: text
                         font.family: "Microsoft YaHei"
                         font.pixelSize: 15
                         text: modelText
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignBottom
-                        color: (model.index === bar.currentIndex) ? "#148014" : "#000000"
+                        color: (model.index === bar.currentIndex) ? "#4040ff" : "#148014"
                     }
                     background:Image{
-                        width: 24
-                        height: 24
+                        id: image
+                        width: 32
+                        height: 32
                         anchors.horizontalCenter: parent.horizontalCenter
                         source: (model.index === bar.currentIndex) ? modelSrcG : modelSrc
                     }
