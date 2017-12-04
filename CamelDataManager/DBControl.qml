@@ -15,43 +15,16 @@ Rectangle {
         height: parent.height
         width: parent.width
 
-        TabBar {
+        BaseTabBar{
             id: bar
-            height: 64
+            height: 48
             width: 64*myModel.count
-            currentIndex: 0
-
-            ListModel {
-                id: myModel
-                ListElement { modelText: qsTr("新建"); modelSrc: "qrc:/images/DBN.svg"; modelSrcG: "qrc:/images/DBNG.svg";}
-                ListElement { modelText: qsTr("打开"); modelSrc: "qrc:/images/DB.svg"; modelSrcG: "qrc:/images/DBG.svg";}
-                ListElement { modelText: qsTr("修改"); modelSrc: "qrc:/images/DBM.svg"; modelSrcG: "qrc:/images/DBMG.svg";}
-                ListElement { modelText: qsTr("压缩"); modelSrc: "qrc:/images/DBC.svg"; modelSrcG: "qrc:/images/DBCG.svg";}
-                ListElement { modelText: qsTr("删除"); modelSrc: "qrc:/images/DBD.svg"; modelSrcG: "qrc:/images/DBDG.svg";}
-            }
-
-            Repeater {
-                model: myModel
-
-                TabButton {
-                    height: bar.height
-                    contentItem:Text{
-                        id: text
-                        font.family: "Microsoft YaHei"
-                        font.pixelSize: 15
-                        text: modelText
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignBottom
-                        color: (model.index === bar.currentIndex) ? "#4040ff" : "#148014"
-                    }
-                    background:Image{
-                        id: image
-                        width: 32
-                        height: 32
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        source: (model.index === bar.currentIndex) ? modelSrcG : modelSrc
-                    }
-                }
+            Component.onCompleted: {
+                myModel.append({ "modelText": qsTr("新建"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBN.svg", "modelSrcG": "qrc:/images/DBNG.svg"})
+                myModel.append({ "modelText": qsTr("打开"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
+                myModel.append({ "modelText": qsTr("修改"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBM.svg", "modelSrcG": "qrc:/images/DBMG.svg"})
+                myModel.append({ "modelText": qsTr("压缩"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBC.svg", "modelSrcG": "qrc:/images/DBCG.svg"})
+                myModel.append({ "modelText": qsTr("删除"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBD.svg", "modelSrcG": "qrc:/images/DBDG.svg"})
             }
         }
 

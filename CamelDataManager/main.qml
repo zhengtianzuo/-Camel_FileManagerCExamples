@@ -71,66 +71,15 @@ ApplicationWindow {
             }
         }
 
-        TabBar {
-            property int lastIndex: 0
-
+        BaseTabBar{
             id: bar
-            height: 64
+            height: 48
             width: 64*myModel.count
-            currentIndex: 0
             Component.onCompleted: {
-                repeater.itemAt(bar.lastIndex).imageSource = myModel.get(bar.lastIndex).modelSrcG;
-                repeater.itemAt(bar.lastIndex).textColor = "#4040ff";
-            }
-
-            ListModel {
-                id: myModel
-                ListElement { modelText: qsTr("数据库"); modelSrc: "qrc:/images/DB.svg"; modelSrcG: "qrc:/images/DBG.svg";}
-                ListElement { modelText: qsTr("浏览"); modelSrc: "qrc:/images/List.svg"; modelSrcG: "qrc:/images/ListG.svg";}
-                ListElement { modelText: qsTr("查询"); modelSrc: "qrc:/images/Search.svg"; modelSrcG: "qrc:/images/SearchG.svg";}
-                ListElement { modelText: qsTr("关于"); modelSrc: "qrc:/images/About.svg"; modelSrcG: "qrc:/images/AboutG.svg";}
-            }
-
-            Repeater {
-                id: repeater
-                model: myModel
-
-                TabButton {
-                    property alias imageSource: image.source
-                    property alias textColor: text.color
-
-                    height: bar.height
-                    contentItem:Text{
-                        id: text
-                        text: modelText
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignBottom
-                        font.family: "Microsoft YaHei"
-                        font.pixelSize: 15
-                        color: "#148014"
-                    }
-                    background:Image{
-                        id: image
-                        width: 32
-                        height: 32
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        source: modelSrc
-                    }
-                    onHoveredChanged: {
-                        if (model.index !== bar.currentIndex){
-                            hovered ? text.color = "#4040ff" : text.color = "#148014"
-                            hovered ? image.source = modelSrcG : image.source = modelSrc
-                        }
-                    }
-                    onClicked: {
-                        repeater.itemAt(bar.lastIndex).imageSource = myModel.get(bar.lastIndex).modelSrc;
-                        repeater.itemAt(bar.lastIndex).textColor = "#148014";
-
-                        image.source = modelSrcG;
-                        text.color = "#4040ff";
-                        bar.lastIndex = model.index;
-                    }
-                }
+                myModel.append({ "modelText": qsTr("数据库"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
+                myModel.append({ "modelText": qsTr("浏览"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/List.svg", "modelSrcG": "qrc:/images/ListG.svg"})
+                myModel.append({ "modelText": qsTr("查询"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/Search.svg", "modelSrcG": "qrc:/images/SearchG.svg"})
+                myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
             }
         }
 

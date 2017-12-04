@@ -44,5 +44,6 @@
         <file>images/DBMG.svg</file>
         <file>images/DBN.svg</file>
         <file>images/DBNG.svg</file>
+        <file>BaseTabBar.qml</file>
     </qresource>
 </RCC>
