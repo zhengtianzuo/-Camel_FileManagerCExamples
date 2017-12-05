@@ -113,7 +113,7 @@ Page{
 
     DBControl{
         id: dbControl
-        anchors.top: rectInfo.bottom
+        anchors.top: dbInfo.bottom
         anchors.topMargin: defaultMargin
         anchors.bottom: parent.bottom
         anchors.bottomMargin: defaultMargin
