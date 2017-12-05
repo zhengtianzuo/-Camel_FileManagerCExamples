@@ -1,5 +1,5 @@
 ﻿/*!
- *@file DBs.qml
+ *@file DBBrowser.qml
  *@brief 数据库
  *@version 1.0
  *@section LICENSE Copyright (C) 2003-2103 CamelSoft Corporation
@@ -100,8 +100,8 @@ Page{
         interactive: false
     }
 
-    Rectangle{
-        id: rectInfo
+    DBInfo{
+        id: dbInfo
         height: parent.height/2
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
@@ -109,7 +109,6 @@ Page{
         anchors.leftMargin: defaultMargin
         anchors.right: parent.right
         anchors.rightMargin: defaultMargin
-        color: "#AAAAAA"
     }
 
     DBControl{

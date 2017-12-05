@@ -1,6 +1,6 @@
 ﻿/*!
- *@file Browser.qml
- *@brief 浏览
+ *@file DBAbout.qml
+ *@brief 关于
  *@version 1.0
  *@section LICENSE Copyright (C) 2003-2103 CamelSoft Corporation
  *@author zhengtianzuo
@@ -10,7 +10,7 @@ import QtQuick.Controls 2.0
 
 Rectangle{
     Text {
-        text: qsTr("浏览")
+        text: qsTr("关于")
         anchors.centerIn: parent
     }
 }

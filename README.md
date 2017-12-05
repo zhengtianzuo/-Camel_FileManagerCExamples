@@ -60,3 +60,15 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 2. CamelDataManager: CamelFileManagerC数据库的可视化开发工具
 3. QmlSkins: Qml全局动态换肤
 4. SilkConfig: Silk配置管理程序
+
+
+***
+#### **捐赠**
+######捐赠名单:
+
+
+
+<img src="https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/weixin.jpg?raw=true" width="50%" height="50%" /><img src="https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/zhifubao.jpg?raw=true" width="50%" height="50%" />
+
+###### 觉得非常的内容还不错, 就请作者喝杯咖啡吧~~
+***
