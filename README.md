@@ -68,7 +68,7 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 
 
 
-<img src="https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/weixin.jpg?raw=true" width="50%" height="50%" /><img src="https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/zhifubao.jpg?raw=true" width="50%" height="50%" />
+<img src="https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/weixin.jpg?raw=true" width="50%" height="20%" /><img src="https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/zhifubao.jpg?raw=true" width="50%" height="20%" />
 
 ###### 觉得分享的内容还不错, 就请作者喝杯咖啡吧~~
 ***
