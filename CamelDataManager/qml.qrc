@@ -46,5 +46,6 @@
         <file>qml/BaseTabBar.qml</file>
         <file>qml/DBBrowser.qml</file>
         <file>qml/DBInfo.qml</file>
+        <file>qml/BaseTextField.qml</file>
     </qresource>
 </RCC>
