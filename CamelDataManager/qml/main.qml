@@ -9,6 +9,8 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 
 ApplicationWindow {
+    property int defaultMargin: 6
+
     id: frmWindow
     visible: true
     width: 800
@@ -17,8 +19,6 @@ ApplicationWindow {
     flags: Qt.Window | Qt.FramelessWindowHint
     font.family: "Microsoft YaHei"
     font.pixelSize: 15
-
-    property int defaultMargin: 6
 
     MouseArea{
         anchors.fill: parent
@@ -39,7 +39,7 @@ ApplicationWindow {
 
         Row{
             id: rowBtn
-            height: 24
+            height: 32
             spacing: defaultMargin/2
             anchors.right: parent.right
             anchors.rightMargin: defaultMargin
@@ -76,10 +76,10 @@ ApplicationWindow {
             height: 48
             width: 64*myModel.count
             Component.onCompleted: {
-                myModel.append({ "modelText": qsTr("数据库"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
-                myModel.append({ "modelText": qsTr("浏览"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/List.svg", "modelSrcG": "qrc:/images/ListG.svg"})
-                myModel.append({ "modelText": qsTr("查询"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/Search.svg", "modelSrcG": "qrc:/images/SearchG.svg"})
-                myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
+//                myModel.append({ "modelText": qsTr("数据库"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
+//                myModel.append({ "modelText": qsTr("浏览"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/List.svg", "modelSrcG": "qrc:/images/ListG.svg"})
+//                myModel.append({ "modelText": qsTr("查询"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/Search.svg", "modelSrcG": "qrc:/images/SearchG.svg"})
+//                myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
             }
         }
 
