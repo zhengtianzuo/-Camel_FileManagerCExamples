@@ -14,6 +14,7 @@ Rectangle{
     property alias inputText: tName.text
     property alias inputWidth: rname.width
 
+    width: lname.width+defaultMargin+rname.width+defaultMargin*2
     border.color: "#148014"
     border.width: 1
 
@@ -38,7 +39,7 @@ Rectangle{
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
         anchors.left: lname.right
-        anchors.leftMargin: defaultMargin*2
+        anchors.leftMargin: defaultMargin
         TextField{
             id: tName
             anchors.left: parent.left
