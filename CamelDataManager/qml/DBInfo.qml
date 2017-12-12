@@ -33,7 +33,16 @@ Rectangle {
                 anchors.leftMargin: defaultMargin
                 showText: qsTr("文件数:")
                 inputText: qsTr("99")
-                inputWidth: 30
+                inputWidth: 60
+            }
+
+            BaseTextField{
+                id: dbSize
+                anchors.left: dbNum.right
+                anchors.leftMargin: defaultMargin
+                showText: qsTr("大小:")
+                inputText: qsTr("1.25M")
+                inputWidth: 60
             }
 
             }

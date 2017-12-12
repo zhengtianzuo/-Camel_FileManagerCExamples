@@ -44,6 +44,8 @@ Rectangle{
             id: tName
             anchors.left: parent.left
             anchors.leftMargin: defaultMargin
+            anchors.right: parent.right
+            anchors.rightMargin: defaultMargin
             height: parent.height
             text: qsTr("")
             font.family: "Microsoft YaHei"
