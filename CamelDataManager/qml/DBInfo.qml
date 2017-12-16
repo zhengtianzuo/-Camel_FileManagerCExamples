@@ -7,6 +7,7 @@
 */
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import QtCharts 2.2
 
 Rectangle {
     property int defaultMargin: 6
@@ -17,6 +18,7 @@ Rectangle {
         anchors.fill: parent
 
         Rectangle{
+            id: dbInfo
             height: 30+defaultMargin*2
             width: parent.width
             border.color: "#148014"
@@ -47,6 +49,7 @@ Rectangle {
         }
 
         Rectangle{
+            id: dbpath
             height: 30+defaultMargin*2
             width: parent.width
             border.color: "#148014"
@@ -55,9 +58,46 @@ Rectangle {
             BaseTextField{
                 id: ldbPath
                 showText: qsTr("路径:")
-                inputText: qsTr("C:/Program Files (x86)/Microsoft SDKs/Windows Kits/10/ExtensionSDKs/Microsoft.VCLibs/14.0/Appx/Retail/x86/Microsoft.VCLibs.x86.14.00.appx")
                 inputWidth: parent.width-showWidth-defaultMargin*3
+                Component.onCompleted: {
+                    ldbPath.inputText = qsTr("C:/Program Files (x86)/Microsoft SDKs/Windows Kits/10/ExtensionSDKs/Microsoft.VCLibs/14.0/Appx/Retail/x86/Microsoft.VCLibs.x86.14.00.appx")
+                    ldbPath.tNameCursorPos = 0
+                }
             }
         }
+
+//        ChartView {
+//            height: parent.height - dbInfo.height - dbpath.height
+//            width: parent.width
+//            theme: ChartView.ChartThemeQt
+//            antialiasing: true
+//            legend.visible: false
+//            animationOptions: ChartView.AllAnimations
+
+//            PieSeries {
+//                id: pieSeries
+//                PieSlice {
+//                    borderColor: "#AAAAAA"
+//                    color: "#804040"
+//                    label: qsTr("整形")
+//                    labelVisible: true
+//                    value: 66.6
+//                }
+//                PieSlice {
+//                    borderColor: "#AAAAAA"
+//                    color: "#408040"
+//                    label: qsTr("字符串")
+//                    labelVisible: true
+//                    value: 30
+//                }
+//                PieSlice {
+//                    borderColor: "#AAAAAA"
+//                    color: "#404080"
+//                    label: qsTr("文件")
+//                    labelVisible: true
+//                    value: 3.4
+//                }
+//            }
+//        }
     }
 }

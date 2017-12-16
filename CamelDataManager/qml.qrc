@@ -47,5 +47,10 @@
         <file>qml/DBBrowser.qml</file>
         <file>qml/DBInfo.qml</file>
         <file>qml/BaseTextField.qml</file>
+        <file>qml/DBCompress.qml</file>
+        <file>qml/DBDelete.qml</file>
+        <file>qml/DBModify.qml</file>
+        <file>qml/DBNew.qml</file>
+        <file>qml/DBOpen.qml</file>
     </qresource>
 </RCC>

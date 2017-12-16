@@ -5,16 +5,14 @@
  *@section LICENSE Copyright (C) 2003-2103 CamelSoft Corporation
  *@author zhengtianzuo
 */
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
-
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication app(argc, argv);
     QQmlApplicationEngine engine;
-    engine.load(QUrl(QLatin1String("qrc:/qml/main.qml")));
-
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     return app.exec();
 }

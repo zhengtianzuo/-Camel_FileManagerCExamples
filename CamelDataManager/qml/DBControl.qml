@@ -12,8 +12,7 @@ Rectangle {
     id: frmWindow
 
     Column{
-        height: parent.height
-        width: parent.width
+        anchors.fill: parent
 
         BaseTabBar{
             id: bar
@@ -38,34 +37,24 @@ Rectangle {
                 bar.currentIndex = currentIndex;
             }
 
-            Rectangle{
-                Text{
-                    text: "1"
-                }
+            DBNew{
+
             }
 
-            Rectangle{
-                Text{
-                    text: "2"
-                }
+            DBOpen{
+
             }
 
-            Rectangle{
-                Text{
-                    text: "3"
-                }
+            DBModify{
+
             }
 
-            Rectangle{
-                Text{
-                    text: "4"
-                }
+            DBCompress{
+
             }
 
-            Rectangle{
-                Text{
-                    text: "5"
-                }
+            DBDelete{
+
             }
         }
     }

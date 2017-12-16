@@ -48,8 +48,7 @@ Page{
                 id: label
                 font.family: "microsoft yahei"
                 font.pointSize: 12
-                height: parent.height
-                width: parent.width
+                anchors.fill: parent
                 text: model.text
                 color: "#148014"
                 verticalAlignment: Text.AlignVCenter
