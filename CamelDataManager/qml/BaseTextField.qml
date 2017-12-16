@@ -11,6 +11,7 @@ import QtQuick.Controls 2.0
 Rectangle{
     property int defaultMargin: 6
     property alias showText: lname.text
+    property alias showWidth: lname.width
     property alias inputText: tName.text
     property alias inputWidth: rname.width
 
@@ -39,7 +40,7 @@ Rectangle{
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
         anchors.left: lname.right
-        anchors.leftMargin: defaultMargin
+        anchors.leftMargin: defaultMargin/2
         TextField{
             id: tName
             anchors.left: parent.left
@@ -54,6 +55,7 @@ Rectangle{
             cursorVisible: false
             readOnly: true
             verticalAlignment: Text.AlignVCenter
+            cursorPosition: 0
         }
     }
 }

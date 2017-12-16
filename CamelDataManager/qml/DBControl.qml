@@ -33,7 +33,7 @@ Rectangle {
             height: frmWindow.height - bar.height
             width: parent.width
             currentIndex: bar.currentIndex
-			interactive: false
+            interactive: false
             onCurrentIndexChanged: {
                 bar.currentIndex = currentIndex;
             }

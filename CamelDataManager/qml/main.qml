@@ -13,8 +13,8 @@ ApplicationWindow {
 
     id: frmWindow
     visible: true
-    width: 800
-    height: 600
+    width: 1024
+    height: 768
     title: qsTr("")
     flags: Qt.Window | Qt.FramelessWindowHint
     font.family: "Microsoft YaHei"
@@ -88,7 +88,7 @@ ApplicationWindow {
             height: frmWindow.height - bar.height - rowBtn.height
             width: parent.width
             currentIndex: bar.currentIndex
-			interactive: false
+            interactive: false
             onCurrentIndexChanged: {
                 bar.currentIndex = currentIndex;
             }
