@@ -13,6 +13,8 @@ Rectangle{
     property int defaultMargin: 6
 
     id: frmWindow
+    border.color: "#148014"
+    border.width: 1
 
     FolderDialog {
         id: folderDialog
@@ -26,6 +28,7 @@ Rectangle{
 
     Column{
         anchors.fill: parent
+        spacing: defaultMargin
 
         BaseTextField{
             id: dbName
@@ -43,6 +46,7 @@ Rectangle{
             inputText: qsTr("")
             inputWidth: parent.width-showWidth-defaultMargin*3
             readOnly: false
+            echoMode: TextInput.Password
         }
 
         BaseTextField{
@@ -52,25 +56,24 @@ Rectangle{
             inputText: qsTr("")
             inputWidth: parent.width-showWidth-defaultMargin*3
             readOnly: false
+            echoMode: TextInput.Password
         }
 
-        Row{
-            height: ldbPath.height
+        BaseTextField{
+            id: ldbPath
             width: parent.width
-
-            BaseTextField{
-                id: ldbPath
-                showText: qsTr("路径:")
-                showWidth: 80
-                inputWidth: parent.width-showWidth-defaultMargin*3 - browser.width
-                readOnly: false
-            }
+            showText: qsTr("路径:")
+            showWidth: 80
+            inputWidth: parent.width-showWidth-defaultMargin*3 - browser.width
+            readOnly: false
 
             BaseButton{
                 id: browser
                 height: 30
                 width: 120
                 anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: defaultMargin
                 text: qsTr("浏览")
                 onSClicked: {
                     folderDialog.open();

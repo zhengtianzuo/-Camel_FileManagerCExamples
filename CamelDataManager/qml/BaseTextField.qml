@@ -16,6 +16,7 @@ Rectangle{
     property alias inputWidth: rname.width
     property alias tNameCursorPos: tName.cursorPosition
     property alias readOnly: tName.readOnly
+    property alias echoMode: tName.echoMode
 
     height: 30+defaultMargin*2
     width: lname.width+defaultMargin+rname.width+defaultMargin*2

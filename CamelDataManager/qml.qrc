@@ -52,5 +52,7 @@
         <file>qml/DBModify.qml</file>
         <file>qml/DBNew.qml</file>
         <file>qml/DBOpen.qml</file>
+        <file>qml/BaseProgress.qml</file>
+        <file>qml/BaseCheckBox.qml</file>
     </qresource>
 </RCC>

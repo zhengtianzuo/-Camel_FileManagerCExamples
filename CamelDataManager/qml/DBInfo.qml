@@ -13,6 +13,7 @@ Rectangle {
     property int defaultMargin: 6
 
     id: frmWindow
+    visible: false
 
     Column{
         anchors.fill: parent
