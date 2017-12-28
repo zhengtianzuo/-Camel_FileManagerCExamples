@@ -54,5 +54,7 @@
         <file>qml/DBOpen.qml</file>
         <file>qml/BaseProgress.qml</file>
         <file>qml/BaseCheckBox.qml</file>
+        <file>qml/BaseTableView.qml</file>
+        <file>images/logo.jpg</file>
     </qresource>
 </RCC>

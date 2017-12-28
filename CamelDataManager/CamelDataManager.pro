@@ -8,6 +8,10 @@ QT += qml quick widgets charts
 
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    src/DataTableView.cpp
 
 RESOURCES += qml.qrc
+
+HEADERS += \
+    src/DataTableView.h

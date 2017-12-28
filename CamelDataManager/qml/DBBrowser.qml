@@ -17,66 +17,66 @@ Page{
     ListModel {
         id: listModel
 
-//        ListElement {
-//            text: qsTr("111222333随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("AAABBBCCC随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("DDDEEEFFF随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("GGGHHHIII随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("JJJKKKLLL随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("111222333随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("AAABBBCCC随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("DDDEEEFFF随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("GGGHHHIII随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("JJJKKKLLL随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("111222333随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("AAABBBCCC随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("DDDEEEFFF随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("GGGHHHIII随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("JJJKKKLLL随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("111222333随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("AAABBBCCC随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("DDDEEEFFF随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("GGGHHHIII随便的一些内容")
-//        }
-//        ListElement {
-//            text: qsTr("JJJKKKLLL随便的一些内容")
-//        }
+        ListElement {
+            text: qsTr("111222333随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("AAABBBCCC随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("DDDEEEFFF随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("GGGHHHIII随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("JJJKKKLLL随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("111222333随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("AAABBBCCC随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("DDDEEEFFF随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("GGGHHHIII随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("JJJKKKLLL随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("111222333随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("AAABBBCCC随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("DDDEEEFFF随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("GGGHHHIII随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("JJJKKKLLL随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("111222333随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("AAABBBCCC随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("DDDEEEFFF随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("GGGHHHIII随便的一些内容")
+        }
+        ListElement {
+            text: qsTr("JJJKKKLLL随便的一些内容")
+        }
     }
 
     Component{
@@ -130,40 +130,40 @@ Page{
         }
     }
 
-    ListView{
-        id: listview
-        width: parent.width/3
-        anchors.top: parent.top
-        anchors.topMargin: defaultMargin
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: defaultMargin
-        anchors.left: parent.left
-        anchors.leftMargin: defaultMargin
-        model: listModel
-        delegate: listDelegate
-        interactive: false
-    }
+//    ListView{
+//        id: listview
+//        width: parent.width/3
+//        anchors.top: parent.top
+//        anchors.topMargin: defaultMargin
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: defaultMargin
+//        anchors.left: parent.left
+//        anchors.leftMargin: defaultMargin
+//        model: listModel
+//        delegate: listDelegate
+//        interactive: false
+//    }
 
-    DBInfo{
-        id: dbInfo
-        height: parent.height/2
-        anchors.top: parent.top
-        anchors.topMargin: defaultMargin
-        anchors.left: listview.right
-        anchors.leftMargin: defaultMargin
-        anchors.right: parent.right
-        anchors.rightMargin: defaultMargin
-    }
+//    DBInfo{
+//        id: dbInfo
+//        height: parent.height/2
+//        anchors.top: parent.top
+//        anchors.topMargin: defaultMargin
+//        anchors.left: listview.right
+//        anchors.leftMargin: defaultMargin
+//        anchors.right: parent.right
+//        anchors.rightMargin: defaultMargin
+//    }
 
-    DBControl{
-        id: dbControl
-        anchors.top: dbInfo.bottom
-        anchors.topMargin: defaultMargin
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: defaultMargin
-        anchors.left: listview.right
-        anchors.leftMargin: defaultMargin
-        anchors.right: parent.right
-        anchors.rightMargin: defaultMargin
-    }
+//    DBControl{
+//        id: dbControl
+//        anchors.top: dbInfo.bottom
+//        anchors.topMargin: defaultMargin
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: defaultMargin
+//        anchors.left: listview.right
+//        anchors.leftMargin: defaultMargin
+//        anchors.right: parent.right
+//        anchors.rightMargin: defaultMargin
+//    }
 }

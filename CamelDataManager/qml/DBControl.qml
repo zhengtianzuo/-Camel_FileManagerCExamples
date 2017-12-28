@@ -19,11 +19,11 @@ Rectangle {
             height: 48
             width: 64*myModel.count
             Component.onCompleted: {
-                myModel.append({ "modelText": qsTr("新建"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "1qrc:/images/DBN.svg", "modelSrcG": "1qrc:/images/DBNG.svg"})
-                myModel.append({ "modelText": qsTr("打开"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "1qrc:/images/DB.svg", "modelSrcG": "1qrc:/images/DBG.svg"})
-                myModel.append({ "modelText": qsTr("修改"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "1qrc:/images/DBM.svg", "modelSrcG": "1qrc:/images/DBMG.svg"})
-                myModel.append({ "modelText": qsTr("压缩"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "1qrc:/images/DBC.svg", "modelSrcG": "1qrc:/images/DBCG.svg"})
-                myModel.append({ "modelText": qsTr("删除"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "1qrc:/images/DBD.svg", "modelSrcG": "1qrc:/images/DBDG.svg"})
+                myModel.append({ "modelText": qsTr("新建"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBN.svg", "modelSrcG": "qrc:/images/DBNG.svg"})
+                myModel.append({ "modelText": qsTr("打开"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
+                myModel.append({ "modelText": qsTr("修改"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBM.svg", "modelSrcG": "qrc:/images/DBMG.svg"})
+                myModel.append({ "modelText": qsTr("压缩"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBC.svg", "modelSrcG": "qrc:/images/DBCG.svg"})
+                myModel.append({ "modelText": qsTr("删除"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DBD.svg", "modelSrcG": "qrc:/images/DBDG.svg"})
             }
         }
 
