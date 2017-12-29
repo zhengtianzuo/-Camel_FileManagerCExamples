@@ -115,7 +115,7 @@ ApplicationWindow {
             id: logo
             height: 48
             width: parent.width
-            source: "qrc:/images/logo.jpg"
+            //source: "qrc:/images/logo.jpg"
         }
     }
 }

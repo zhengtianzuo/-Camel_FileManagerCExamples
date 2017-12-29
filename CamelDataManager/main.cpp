@@ -17,7 +17,10 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     DataTableViewModel tableData;
-    tableData.add(QStringLiteral("初始化"), QStringLiteral("999"), QStringLiteral("888"));
+    for (int i = 0; i < 100; i++)
+    {
+        tableData.add(QStringLiteral("这是一个数据"), QStringLiteral("字符串数组"), QStringLiteral("12.53M"));
+    }
     engine.rootContext()->setContextProperty("tableData", &tableData);
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     return app.exec();

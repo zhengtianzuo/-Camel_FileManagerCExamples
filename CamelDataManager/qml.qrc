@@ -56,5 +56,7 @@
         <file>qml/BaseCheckBox.qml</file>
         <file>qml/BaseTableView.qml</file>
         <file>images/logo.jpg</file>
+        <file>qml/BasePageNavigation.qml</file>
+        <file>images/arrow.png</file>
     </qresource>
 </RCC>

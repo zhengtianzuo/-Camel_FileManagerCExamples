@@ -22,7 +22,7 @@ Rectangle{
 
         BaseButton{
             id: btnClear
-            height: 50
+            height: 48
             width: 120
             text: qsTr("清空")
             onSClicked: {
@@ -33,7 +33,7 @@ Rectangle{
         Column{
             BaseButton{
                 id: btnDelete
-                height: 25
+                height: 24
                 width: 120
                 text: qsTr("删除")
                 onSClicked: {
@@ -43,7 +43,7 @@ Rectangle{
 
             BaseCheckBox{
                 id: chkDelete
-                height: 25
+                height: 24
                 width: 120
                 text: qsTr("同时本地也删除")
             }
