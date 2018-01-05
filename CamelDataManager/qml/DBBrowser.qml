@@ -130,40 +130,41 @@ Page{
         }
     }
 
-//    ListView{
-//        id: listview
-//        width: parent.width/3
-//        anchors.top: parent.top
-//        anchors.topMargin: defaultMargin
-//        anchors.bottom: parent.bottom
-//        anchors.bottomMargin: defaultMargin
-//        anchors.left: parent.left
-//        anchors.leftMargin: defaultMargin
-//        model: listModel
-//        delegate: listDelegate
-//        interactive: false
-//    }
+    ListView{
+        z:1
+        id: listview
+        width: parent.width/3
+        anchors.top: parent.top
+        anchors.topMargin: defaultMargin
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: defaultMargin
+        anchors.left: parent.left
+        anchors.leftMargin: defaultMargin
+        model: listModel
+        delegate: listDelegate
+        interactive: false
+    }
 
-//    DBInfo{
-//        id: dbInfo
-//        height: parent.height/2
-//        anchors.top: parent.top
-//        anchors.topMargin: defaultMargin
-//        anchors.left: listview.right
-//        anchors.leftMargin: defaultMargin
-//        anchors.right: parent.right
-//        anchors.rightMargin: defaultMargin
-//    }
+    DBInfo{
+        id: dbInfo
+        height: parent.height*0.55
+        anchors.top: parent.top
+        anchors.topMargin: defaultMargin
+        anchors.left: listview.right
+        anchors.leftMargin: defaultMargin
+        anchors.right: parent.right
+        anchors.rightMargin: defaultMargin
+    }
 
-//    DBControl{
-//        id: dbControl
-//        anchors.top: dbInfo.bottom
-//        anchors.topMargin: defaultMargin
-//        anchors.bottom: parent.bottom
-//        anchors.bottomMargin: defaultMargin
-//        anchors.left: listview.right
-//        anchors.leftMargin: defaultMargin
-//        anchors.right: parent.right
-//        anchors.rightMargin: defaultMargin
-//    }
+    DBControl{
+        id: dbControl
+        anchors.top: dbInfo.bottom
+        anchors.topMargin: defaultMargin
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: defaultMargin
+        anchors.left: listview.right
+        anchors.leftMargin: defaultMargin
+        anchors.right: parent.right
+        anchors.rightMargin: defaultMargin
+    }
 }

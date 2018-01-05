@@ -80,13 +80,13 @@ ApplicationWindow {
                 myModel.append({ "modelText": qsTr("浏览"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/List.svg", "modelSrcG": "qrc:/images/ListG.svg"})
                 myModel.append({ "modelText": qsTr("查询"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/Search.svg", "modelSrcG": "qrc:/images/SearchG.svg"})
                 myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
-                bar.currentIndex = 1;
+                //bar.currentIndex = 1;
             }
         }
 
         SwipeView {
             id: view
-            height: frmWindow.height - bar.height - rowBtn.height - logo.height
+            height: frmWindow.height - bar.height - rowBtn.height
             width: parent.width
             currentIndex: bar.currentIndex
             interactive: false
@@ -109,13 +109,6 @@ ApplicationWindow {
             DBAbout{
 
             }
-        }
-
-        Image{
-            id: logo
-            height: 48
-            width: parent.width
-            //source: "qrc:/images/logo.jpg"
         }
     }
 }
