@@ -84,6 +84,7 @@ Page{
         Rectangle{
             property int fromIndex: 0
             property int toIndex: 0
+            color: "transparent"
 
             id: listItem
             width: listview.width

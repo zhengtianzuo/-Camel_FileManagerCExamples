@@ -20,6 +20,12 @@ ApplicationWindow {
     font.family: "Microsoft YaHei"
     font.pixelSize: 15
 
+    Image {
+        id: imgBack
+        anchors.fill: parent
+        source: "qrc:/images/SilkStyle_Back.png"
+    }
+
     MouseArea{
         anchors.fill: parent
         property point clickPos: "0,0"

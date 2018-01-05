@@ -22,9 +22,8 @@ Rectangle{
         border.width: 1
 
         Column{
-            anchors.top: parent.top
-            anchors.topMargin: defaultMargin
-            height: parent.height
+            anchors.verticalCenter: parent.verticalCenter
+            height: contentHeight
             width: parent.width
             spacing: defaultMargin
 

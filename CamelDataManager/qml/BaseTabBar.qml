@@ -15,6 +15,9 @@ TabBar {
 
     id: bar
     currentIndex: 0
+    background: Rectangle{
+        color: "transparent"
+    }
 
     ListModel {
         id: myModel

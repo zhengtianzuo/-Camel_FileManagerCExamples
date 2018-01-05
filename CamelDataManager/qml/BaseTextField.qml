@@ -45,6 +45,7 @@ Rectangle{
         anchors.topMargin: defaultMargin
         anchors.left: lname.right
         anchors.leftMargin: defaultMargin/2
+
         TextField{
             id: tName
             anchors.left: parent.left

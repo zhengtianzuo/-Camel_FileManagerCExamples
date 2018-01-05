@@ -58,5 +58,6 @@
         <file>images/logo.jpg</file>
         <file>qml/BasePageNavigation.qml</file>
         <file>images/arrow.png</file>
+        <file>images/SilkStyle_Back.png</file>
     </qresource>
 </RCC>

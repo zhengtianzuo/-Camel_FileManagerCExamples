@@ -24,6 +24,7 @@ Rectangle {
             width: parent.width
             border.color: "#148014"
             border.width: 1
+            color: "transparent"
 
             BaseTextField{
                 id: dbName

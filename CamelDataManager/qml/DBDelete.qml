@@ -17,7 +17,7 @@ Rectangle{
 
     Row{
         anchors.margins: defaultMargin
-        anchors.fill: parent
+        anchors.centerIn: parent
         spacing: defaultMargin
 
         BaseButton{
