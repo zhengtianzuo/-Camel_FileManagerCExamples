@@ -57,6 +57,18 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 
 ***
 
+
+***
+CamelDataManager: CamelFileManagerC数据库的可视化开发工具
+
+![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelDataManager/show1.png?raw=true)
+![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelDataManager/show2.png?raw=true)
+
+***
+
+
+
+
 计划加入的工程:
 1. CamelFileManagerCTest: 文件管理开发组件测试程序
 2. CamelDataManager: CamelFileManagerC数据库的可视化开发工具
