@@ -15,7 +15,7 @@
 #if defined (Camel_FileManagerC_dllexport)
 #define Camel_FileManagerC_LIB _declspec(dllexport)
 #else
-#define Camel_FileManagerC_LIB _declspec(dllimport)
+#define Camel_FileManagerC_LIB //_declspec(dllimport)
 #endif
 #else
 #define Camel_FileManagerC_ATR __attribute__((visibility("default")))
@@ -102,8 +102,8 @@ typedef struct tag_Cls_stuFunction
 class Camel_FileManagerC_LIB Camel_FileManagerCInt
 {
 public:
-    Camel_FileManagerCInt() {};
-    virtual ~Camel_FileManagerCInt() {};
+    Camel_FileManagerCInt() {}
+    virtual ~Camel_FileManagerCInt() {}
 
     /*!
     *@name Cls_funManagerInitialize
@@ -615,8 +615,8 @@ public:
 class Camel_FileManagerC_LIB Camel_DataManagerCInt
 {
 public:
-    Camel_DataManagerCInt() {};
-    virtual ~Camel_DataManagerCInt() {};
+    Camel_DataManagerCInt() {}
+    virtual ~Camel_DataManagerCInt() {}
 
     /*!
     *@name Cls_funManagerInitialize
