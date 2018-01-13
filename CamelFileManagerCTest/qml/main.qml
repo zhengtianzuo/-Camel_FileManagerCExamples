@@ -30,7 +30,7 @@ ApplicationWindow {
         text: qsTr("开始")
         font.pixelSize: 18
         onClicked: {
-
+            fmTest.cls_funStartTest();
         }
     }
 }

@@ -8,6 +8,7 @@
 #pragma once
 #include <QObject>
 #include <QThread>
+#include <QCoreApplication>
 #include "../../CamelFileManagerCDll/Camel_FileManagerCInterface.h"
 #include "DataTableView.h"
 
@@ -15,14 +16,21 @@ class CamelFileManagerCTestThread : public QThread
 {
     Q_OBJECT
 public:
-    CamelFileManagerCTestThread(Camel_FileManagerCInt* pFMInt, DataTableViewModel* pTableData);
+    CamelFileManagerCTestThread(Camel_FileManagerCInt* pFMInt);
 
 protected:
     void run();
 
+signals:
+    void addInfo(QString strName, QString strExpect, QString strReal, QString strError);
+    void setInfo(int row, int column, QString strText);
+    void delInfo(int row);
+    void refreshInfo();
+
 private:
     Camel_FileManagerCInt* Sub_FMInt;
-    DataTableViewModel* Sub_pTableData;
+
+    void goDBTest();
 };
 
 class CamelFileManagerCTest : public QObject
@@ -32,7 +40,7 @@ public:
     CamelFileManagerCTest();
     ~CamelFileManagerCTest();
     DataTableViewModel* Cls_funGetTableData();
-    void Cls_funStartTest();
+    Q_INVOKABLE void cls_funStartTest();
 
 signals:
 
