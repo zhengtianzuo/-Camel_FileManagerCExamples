@@ -22,7 +22,7 @@ protected:
     void run();
 
 signals:
-    void addInfo(QString strName, QString strExpect, QString strReal, QString strError);
+    void addInfo(QString strName, QString strCName, QString strExpect, QString strReal, QString strError);
     void setInfo(int row, int column, QString strText);
     void delInfo(int row);
     void refreshInfo();
@@ -30,7 +30,8 @@ signals:
 private:
     Camel_FileManagerCInt* Sub_FMInt;
 
-    void goDBTest();
+    void Sub_subDBTest();
+    void Sub_subDataTest();
 };
 
 class CamelFileManagerCTest : public QObject

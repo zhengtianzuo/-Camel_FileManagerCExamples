@@ -11,6 +11,7 @@
 
 enum Role {
     NameRole,
+    CNameRole,
     ExpectRole,
     RealRole,
     ErrorRole
@@ -26,7 +27,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    Q_INVOKABLE void add(QString strName, QString strExpect, QString strReal, QString strError);
+    Q_INVOKABLE void add(QString strName, QString strCName, QString strExpect, QString strReal, QString strError);
     Q_INVOKABLE void set(int row, int column, QString strText);
     Q_INVOKABLE void del(int row);
     Q_INVOKABLE void refresh();

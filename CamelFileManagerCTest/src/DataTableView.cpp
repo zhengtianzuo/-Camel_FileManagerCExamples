@@ -36,17 +36,19 @@ QHash<int, QByteArray> DataTableViewModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
     roles[NameRole] = "name";
+    roles[CNameRole] = "cname";
     roles[ExpectRole] = "expect";
     roles[RealRole] = "real";
     roles[ErrorRole] = "error";
     return roles;
 }
 
-void DataTableViewModel::add(QString strName, QString strExpect, QString strReal, QString strError)
+void DataTableViewModel::add(QString strName, QString strCName, QString strExpect, QString strReal, QString strError)
 {
     beginInsertRows(QModelIndex(), m_aryData.size(), m_aryData.size());
     QVector<QString> list;
     list.push_back(strName);
+    list.push_back(strCName);
     list.push_back(strExpect);
     list.push_back(strReal);
     list.push_back(strError);
