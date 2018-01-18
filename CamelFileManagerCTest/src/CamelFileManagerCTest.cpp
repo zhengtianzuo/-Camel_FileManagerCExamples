@@ -17,7 +17,7 @@ CamelFileManagerCTest::CamelFileManagerCTest()
     Sub_pTestThread = new CamelFileManagerCTestThread(Sub_FMInt);
 
     connect(Sub_pTestThread, SIGNAL(addInfo(QString,QString,QString,QString,QString)),
-                Sub_pTableData, SLOT(add(QString,QString,QString,QString,QString)));
+            Sub_pTableData, SLOT(add(QString,QString,QString,QString,QString)));
 
 }
 
@@ -103,33 +103,53 @@ void CamelFileManagerCTestThread::Sub_subDBTest()
 void CamelFileManagerCTestThread::Sub_subDataTest()
 {
     int intError = clsFileManager_intErrorCode_Success;
-    string sDBName = "newName";
     string sDBPass = "newpass";
     string sAppPath = QCoreApplication::applicationDirPath().toStdString() + "/";
     string sDBFileName = sAppPath + "test.ztz";
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
+    Cls_stuFunction fun(nullptr, nullptr);
     int intSize = 0;
 
-    //加入短整型数据
-    short srtShort = 1234;
-    Cls_stuDataType dataType(clsFileManager_intDataType_Short, -1, "short");
-    Cls_stuUserData userData(&srtShort, 0);
-    intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
-    emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 加入短整型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    {
+        //加入短整型数据
+        short srtShort = 1234;
+        Cls_stuDataType dataType(clsFileManager_intDataType_Short, -1, "short");
+        Cls_stuUserData userData(&srtShort, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 加入短整型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
-    //修改短整型数据
-    srtShort = 1122;
-    intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
-    emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改短整型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        //修改短整型数据
+        srtShort = 1122;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改短整型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
-    //获取短整型数据
-    srtShort = 0;
-    intSize = 0;
-    Cls_stuFunction fun(nullptr, nullptr);
-    Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(srtShort), intSize);
-    intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &fun, &getUserData);
-    emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取短整型数据"), QString("1122"), QString::number(srtShort), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        //获取短整型数据
+        srtShort = 0;
+        intSize = 0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(srtShort), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &fun, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取短整型数据"), QString("1122"), QString::number(srtShort), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
 
+    {
+        //加入整型数据
+        int intInt = 1234;
+        Cls_stuDataType dataType(clsFileManager_intDataType_Integer, -1, "int");
+        Cls_stuUserData userData(&intInt, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 加入整型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
+        //修改整型数据
+        intInt = 1122;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改整型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取整型数据
+        intInt = 0;
+        intSize = 0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(intInt), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &fun, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取整型数据"), QString("1122"), QString::number(intInt), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
 
 }
