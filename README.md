@@ -39,6 +39,7 @@ Camel_FileManagerC相关的技术分享
 * 加密, 优化的256位AES算法加密
 * 压缩, 优化的zlib算法压缩
 
+
 ![](https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/sysall.png?raw=true)
 
 ###### Camel_CrashReport:
@@ -46,6 +47,7 @@ Camel_FileManagerC相关的技术分享
 程序异常崩溃时生成Dump文件和日志, **非开源** 属于CamelSoft系列基础开发组件.
 
 Dump文件是进程的内存镜像。可以把程序的执行状态通过调试器保存到dump文件中。
+
 
 ![](https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/syswin.png?raw=true)
 
