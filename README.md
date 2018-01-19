@@ -17,14 +17,12 @@
 ![](https://img.shields.io/badge/%E7%BC%96%E8%AF%91-%E6%88%90%E5%8A%9F-brightgreen.svg)
 
 ***
-#### 组件介绍:
+#### 项目背景:
+这里主要介绍Camel_CrashReport和Camel_FileManagerC两个CamelSoft系列基础开发组件的demo和实际的一些应用.
 ***
-###### Camel_CrashReport:
-程序异常崩溃时生成Dump文件和日志, **非开源** 属于CamelSoft系列基础开发组件.
 
-Dump文件是进程的内存镜像。可以把程序的执行状态通过调试器保存到dump文件中。
 
-支持平台：Windows
+#### 组件介绍:
 ***
 ###### Camel_FileManagerC: 基于分布式文件存储的NoSql数据库
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelFileManagerCDll/dromedary.png?raw=true)   中文名: 单峰驼
@@ -44,11 +42,19 @@ Dump文件是进程的内存镜像。可以把程序的执行状态通过调试�
 维护方式：定期对数据库进行压缩，以整合频繁使用所产生的碎片空间。
 
 支持平台：Windows/Android/IOS/MacOS/Linux
+***
+
+***
+###### Camel_CrashReport:
+程序异常崩溃时生成Dump文件和日志, **非开源** 属于CamelSoft系列基础开发组件.
+
+Dump文件是进程的内存镜像。可以把程序的执行状态通过调试器保存到dump文件中。
+
+支持平台：Windows
+***
 
 
-
-
-
+#### 应用实例:
 ***
 CamelCrashReportTest: 崩溃报告开发组件测试程序
 
@@ -70,12 +76,13 @@ CamelDataManager: CamelFileManagerC数据库的可视化开发工具
 
 
 
-
-计划加入的工程:
+#### 计划加入的工程:
 1. CamelFileManagerCTest: 文件管理开发组件测试程序
-2. CamelDataManager: CamelFileManagerC数据库的可视化开发工具
-3. QmlSkins: Qml全局动态换肤
-4. SilkConfig: Silk配置管理程序
+2. QmlSkins: Qml全局动态换肤
+3. SilkConfig: Silk配置管理程序
+
+
+
 
 
 ***
