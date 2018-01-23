@@ -29,6 +29,8 @@ signals:
 
 private:
     Camel_FileManagerCInt* Sub_FMInt;
+    static void Sub_subGetData(int intFunction, void *pContext, void *pUserData,
+                int intUserSize, void *pReturnData, int intReturnSize);
 
     void Sub_subDBTest();
     void Sub_subDataTest();

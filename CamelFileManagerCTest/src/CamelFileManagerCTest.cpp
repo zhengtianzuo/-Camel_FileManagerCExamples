@@ -73,6 +73,19 @@ void CamelFileManagerCTestThread::run()
     emit addInfo(QString("Cls_funManagerDB_CloseDataBase"), QStringLiteral(" 关闭数据库"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 }
 
+void CamelFileManagerCTestThread::Sub_subGetData(int intFunction, void *pContext, void *pUserData, int intUserSize, void *pReturnData, int intReturnSize)
+{
+    switch (intFunction) {
+    case clsFileManager_intDataType_String:
+    {
+        //memcpy(pUserData, pReturnData, intReturnSize);
+    }
+        break;
+    default:
+        break;
+    }
+}
+
 void CamelFileManagerCTestThread::Sub_subDBTest()
 {
     int intError = clsFileManager_intErrorCode_Success;
@@ -235,7 +248,8 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         strString = "";
         intSize = 0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(strString), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &fun, &getUserData);
+        Cls_stuFunction funString(&Sub_subGetData, this);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funString, &getUserData);
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取字符串型数据"), QString("这是一段修改后的字符串abc"), QString(strString.c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
     }
 
