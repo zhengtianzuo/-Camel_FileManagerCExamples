@@ -80,7 +80,6 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 ***
 1. CamelFileManagerCTest: 文件管理开发组件测试程序
 2. QmlSkins: Qml全局动态换肤
-3. SilkConfig: Silk配置管理程序
 
 
 
