@@ -10,7 +10,7 @@ import QtQuick.Controls 2.0
 
 ApplicationWindow {
     visible: true
-    width: 800
+    width: 1000
     height: 600
     title: qsTr("")
 

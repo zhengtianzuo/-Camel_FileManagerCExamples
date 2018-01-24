@@ -15,6 +15,7 @@ CamelFileManagerCTest::CamelFileManagerCTest()
     Sub_FMInt->Cls_funManagerInitialize();
     Sub_pTableData = new DataTableViewModel();
     Sub_pTestThread = new CamelFileManagerCTestThread(Sub_FMInt);
+    clsFileManager_CmdMapInit();
 
     connect(Sub_pTestThread, SIGNAL(addInfo(QString,QString,QString,QString,QString)),
             Sub_pTableData, SLOT(add(QString,QString,QString,QString,QString)));
@@ -73,17 +74,34 @@ void CamelFileManagerCTestThread::run()
     emit addInfo(QString("Cls_funManagerDB_CloseDataBase"), QStringLiteral(" 关闭数据库"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 }
 
-void CamelFileManagerCTestThread::Sub_subGetData(int intFunction, void *pContext, void *pUserData, int intUserSize, void *pReturnData, int intReturnSize)
+void CamelFileManagerCTestThread::Sub_funManagerBytes(
+    int intFunction, void *pContext, char *&pUserData,
+    int &intUserSize, void *pReturnData, int intReturnSize)
 {
-    switch (intFunction) {
-    case clsFileManager_intDataType_String:
+    Q_UNUSED(pContext);
+    Q_UNUSED(intUserSize);
+    switch (intFunction)
     {
-        //memcpy(pUserData, pReturnData, intReturnSize);
+    case clsFileManager_intDataType_String:
+    case clsFileManager_intDataType_File:
+    {
+        pUserData = new char[intReturnSize];
+        memcpy(pUserData, pReturnData, intReturnSize);
     }
-        break;
+    break;
     default:
         break;
     }
+}
+
+void CamelFileManagerCTestThread::Sub_funManagerData(
+    int intFunction, void *pContext, void *pUserData,
+    int intUserSize, void *pReturnData, int intReturnSize)
+{
+    Q_UNUSED(pContext);
+    Q_UNUSED(intUserSize);
+    Q_UNUSED(intReturnSize);
+    Cls_stuFMCmdMap[intFunction].lpFunc(pUserData, pReturnData);
 }
 
 void CamelFileManagerCTestThread::Sub_subDBTest()
@@ -248,9 +266,17 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         strString = "";
         intSize = 0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(strString), intSize);
-        Cls_stuFunction funString(&Sub_subGetData, this);
+        Cls_stuFunction funString(&Sub_funManagerData, this);
         intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funString, &getUserData);
-        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取字符串型数据"), QString("这是一段修改后的字符串abc"), QString(strString.c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取字符串型数据"), QStringLiteral("这是一段修改后的字符串abc"), QString::fromLocal8Bit(strString.c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
     }
+
+
+
+
+
+
+
+
 
 }
