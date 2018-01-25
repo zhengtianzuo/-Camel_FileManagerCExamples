@@ -78,3 +78,10 @@ void DataTableViewModel::refresh()
     beginResetModel();
     endResetModel();
 }
+
+void DataTableViewModel::clear()
+{
+    beginResetModel();
+    m_aryData.clear();
+    endResetModel();
+}

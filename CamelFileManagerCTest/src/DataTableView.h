@@ -31,6 +31,8 @@ public:
     Q_INVOKABLE void set(int row, int column, QString strText);
     Q_INVOKABLE void del(int row);
     Q_INVOKABLE void refresh();
+    Q_INVOKABLE void clear();
+
 private:
    QVector<QVector<QString>> m_aryData;
 };

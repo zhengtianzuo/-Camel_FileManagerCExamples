@@ -10,8 +10,8 @@ import QtQuick.Controls 2.0
 
 ApplicationWindow {
     visible: true
-    width: 1000
-    height: 600
+    width: 1100
+    height: 800
     title: qsTr("")
 
     BaseTableView{
