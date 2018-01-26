@@ -26,9 +26,11 @@ signals:
     void setInfo(int row, int column, QString strText);
     void delInfo(int row);
     void refreshInfo();
+    void clearInfo();
 
 private:
     Camel_FileManagerCInt* Sub_FMInt;
+
     static void Sub_funManagerBytes(
         int intFunction, void *pContext, char *&pUserData, int &intUserSize,
         void *pReturnData, int intReturnSize);
@@ -46,6 +48,7 @@ class CamelFileManagerCTest : public QObject
 public:
     CamelFileManagerCTest();
     ~CamelFileManagerCTest();
+
     DataTableViewModel* Cls_funGetTableData();
     Q_INVOKABLE void cls_funStartTest();
 
