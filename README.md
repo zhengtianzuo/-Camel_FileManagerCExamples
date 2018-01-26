@@ -85,13 +85,13 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 
 #### 联系方式:
 ***
-|作者|郑天佐||
+|作者|郑天佐| |
 |---|---|
-|QQ|278969898||
-|主页|http://www.camelstudio.cn ||
-|邮箱|camelsoft@163.com||
-|博客|http://blog.csdn.net/zhengtianzuo06 ||
-|QQ群|199672080|![](https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/qqgroup.jpg?raw=true)
+|QQ|278969898| |
+|主页|http://www.camelstudio.cn | |
+|邮箱|camelsoft@163.com| |
+|博客|http://blog.csdn.net/zhengtianzuo06 | |
+|QQ群|199672080|![](https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/qqgroup.jpg?raw=true)|
 
 
 
