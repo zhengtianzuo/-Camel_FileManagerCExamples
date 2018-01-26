@@ -95,6 +95,8 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 
 <font color=#9ACD32>加入QQ群</font>![](https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/qq.png?raw=true): 199672080
 
+![](https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/qqgroup.jpg?raw=true)
+
 
 
 
