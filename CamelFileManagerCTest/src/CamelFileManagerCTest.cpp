@@ -392,11 +392,152 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         intSize = 0;
         intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
         emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取短整型数组大小"), QString::number(sizeof(short)*3), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
-
-
-
     }
 
+    {
+        //添加整型数组
+        intSize = -1;
+        vector<int> aryInt;
+        aryInt.push_back(345);
+        aryInt.push_back(456);
+        aryInt.push_back(567);
+        Cls_stuDataType dataType(clsFileManager_intDataType_IntegerArray, -1, "intarray");
+        Cls_stuUserData userData(&aryInt, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加整型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //修改整型数组
+        aryInt.at(0) = 333;
+        aryInt.at(1) = 444;
+        aryInt.at(2) = 555;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改整型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取整型数组
+        aryInt.clear();
+        Cls_stuFunction funInt(&Sub_funManagerData, this);
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryInt), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funInt, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取整型数组"), QString("333"), QString::number(aryInt.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取整型数组"), QString("444"), QString::number(aryInt.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取整型数组"), QString("555"), QString::number(aryInt.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取整型数组大小
+        intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
+        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取整型数组大小"), QString::number(sizeof(int)*3), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
+
+    {
+        //添加浮点型数组
+        intSize = -1;
+        vector<float> aryFloat;
+        aryFloat.push_back(123.45);
+        aryFloat.push_back(234.56);
+        aryFloat.push_back(345.67);
+        Cls_stuDataType dataType(clsFileManager_intDataType_FloatArray, -1, "floatarray");
+        Cls_stuUserData userData(&aryFloat, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加浮点型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //修改浮点型数组
+        aryFloat.at(0) = 234.56;
+        aryFloat.at(1) = 345.67;
+        aryFloat.at(2) = 456.78;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改浮点型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取浮点型数组
+        aryFloat.clear();
+        Cls_stuFunction funFloat(&Sub_funManagerData, this);
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryFloat), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funFloat, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取浮点型数组"), QString("234.56"), QString::number(aryFloat.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取浮点型数组"), QString("345.67"), QString::number(aryFloat.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取浮点型数组"), QString("456.78"), QString::number(aryFloat.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取浮点型数组大小
+        intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
+        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取浮点型数组大小"), QString::number(sizeof(float)*3), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
+
+    {
+        //添加双浮点型数组
+        intSize = -1;
+        vector<double> aryDouble;
+        aryDouble.push_back(234.56);
+        aryDouble.push_back(345.67);
+        aryDouble.push_back(456.78);
+        Cls_stuDataType dataType(clsFileManager_intDataType_DoubleArray, -1, "doublearray");
+        Cls_stuUserData userData(&aryDouble, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加双浮点型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //修改双浮点型数组
+        aryDouble.at(0) = 345.67;
+        aryDouble.at(1) = 456.78;
+        aryDouble.at(2) = 567.89;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改双浮点型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取双浮点型数组
+        aryDouble.clear();
+        Cls_stuFunction funDouble(&Sub_funManagerData, this);
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryDouble), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funDouble, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取双浮点型数组"), QString("345.67"), QString::number(aryDouble.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取双浮点型数组"), QString("456.78"), QString::number(aryDouble.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取双浮点型数组"), QString("567.89"), QString::number(aryDouble.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取双浮点型数组大小
+        intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
+        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取双浮点型数组大小"), QString::number(sizeof(double)*3), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
+
+    {
+        //添加日期型数组
+        intSize = -1;
+        double dateTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        vector<double> aryDate;
+        aryDate.push_back(dateTime);
+        aryDate.push_back(dateTime+100);
+        aryDate.push_back(dateTime+200);
+        Cls_stuDataType dataType(clsFileManager_intDataType_Date, -1, "datearray");
+        Cls_stuUserData userData(&aryDate, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加日期型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //修改日期型数组
+        dateTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
+        double dateTimeNow = dateTime;
+        aryDate.at(0) = dateTime;
+        aryDate.at(1) = dateTime+100;
+        aryDate.at(2) = dateTime+200;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改日期型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取日期型数组
+        aryDate.clear();
+        Cls_stuFunction funDate(&Sub_funManagerData, this);
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryDate), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funDate, &getUserData);
+        QString strTimeNow1 = QDateTime::fromMSecsSinceEpoch(dateTimeNow).toString("yyyy-MM-dd hh:mm:ss");
+        QString strTimeNow2 = QDateTime::fromMSecsSinceEpoch(dateTimeNow+100).toString("yyyy-MM-dd hh:mm:ss");
+        QString strTimeNow3 = QDateTime::fromMSecsSinceEpoch(dateTimeNow+200).toString("yyyy-MM-dd hh:mm:ss");
+        QString strTime1 = QDateTime::fromMSecsSinceEpoch(dateTime).toString("yyyy-MM-dd hh:mm:ss");
+        QString strTime2 = QDateTime::fromMSecsSinceEpoch(dateTime+100).toString("yyyy-MM-dd hh:mm:ss");
+        QString strTime3 = QDateTime::fromMSecsSinceEpoch(dateTime+200).toString("yyyy-MM-dd hh:mm:ss");
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取日期型数组"), strTimeNow1, strTime1, (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取日期型数组"), strTimeNow2, strTime2, (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取日期型数组"), strTimeNow3, strTime3, (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取日期型数组大小
+        intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
+        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取日期型数组大小"), QString::number(sizeof(double)*3), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
 
 
 
