@@ -40,6 +40,7 @@ private:
 
     void Sub_subDBTest();
     void Sub_subDataTest();
+    void Sub_subDataAllTest();
 };
 
 class CamelFileManagerCTest : public QObject

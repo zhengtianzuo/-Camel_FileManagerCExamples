@@ -73,6 +73,9 @@ void CamelFileManagerCTestThread::run()
     //进行数据操作相关测试
     Sub_subDataTest();
 
+    //进行数据统计相关测试
+    Sub_subDataAllTest();
+
     //关闭数据库
     intError = Sub_FMInt->Cls_funManagerDB_CloseDataBase(&dBVerify);
     emit addInfo(QString("Cls_funManagerDB_CloseDataBase"), QStringLiteral(" 关闭数据库"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
@@ -306,59 +309,58 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取字符串型数据大小"), QString::number(intLength), QString::number(strString.length()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
     }
 
-//    {
-//        //添加文件
-//#ifdef Q_OS_WIN32
-//        char chrFile[] = "Camel_FileManagerC.dll";
-//#endif
-//#ifdef Q_OS_LINUX
-//        char chrFile[] = "libCamel_FileManagerC.so";
-//#endif
-//#ifdef Q_OS_OSX
-//        char chrFile[] = "libCamel_FileManagerC.dylib";
-//#endif
-//        Cls_stuDataType dataType(clsFileManager_intDataType_File, -1, "file");
-//        Cls_stuUserData userDataFile(chrFile, 0);
-//        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userDataFile, true, -1);
-//        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加文件"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    {
+        //添加文件
+#ifdef Q_OS_WIN32
+        char chrFile[] = "Camel_FileManagerC.dll";
+#endif
+#ifdef Q_OS_LINUX
+        char chrFile[] = "libCamel_FileManagerC.so";
+#endif
+#ifdef Q_OS_OSX
+        char chrFile[] = "libCamel_FileManagerC.dylib";
+#endif
+        Cls_stuDataType dataType(clsFileManager_intDataType_File, -1, "file");
+        Cls_stuUserData userDataFile(chrFile, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userDataFile, true, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加文件"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
-//        //获取文件大小
-//        intSize = 0;
-//        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
-//        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取文件大小"), QString("461824"), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        //获取文件大小
+        intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
+        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取文件大小"), QString("461824"), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
-//        //获取数据流
-//        intSize = 0;
-//        void *chrData = nullptr;
-//        Cls_stuFunction funFile(&Sub_funManagerBytes, this);
-//        Cls_stuGetUserData getUserData(chrData, intSize);
-//        intError = Sub_FMInt->Cls_funManagerData_ExtractBytes(&dBVerify, &dataType, &funFile, &getUserData);
-//        emit addInfo(QString("Cls_funManagerData_ExtractBytes"), QStringLiteral(" 获取数据流"), QString("461824"), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        //获取数据流
+        intSize = 0;
+        void *chrData = nullptr;
+        Cls_stuFunction funFile(&Sub_funManagerBytes, this);
+        Cls_stuGetUserData getUserData(chrData, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_ExtractBytes(&dBVerify, &dataType, &funFile, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_ExtractBytes"), QStringLiteral(" 获取数据流"), QString("461824"), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
-//        //删除文件
-//        intError = Sub_FMInt->Cls_funManagerData_Delete(&dBVerify, &dataType);
-//        emit addInfo(QString("Cls_funManagerData_Delete"), QStringLiteral(" 删除文件"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        //删除文件
+        intError = Sub_FMInt->Cls_funManagerData_Delete(&dBVerify, &dataType);
+        emit addInfo(QString("Cls_funManagerData_Delete"), QStringLiteral(" 删除文件"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
-//        //添加文件流
-//        Cls_stuUserData userData(chrData, intSize);
-//        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, "", &userData, true, -1);
-//        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加文件流"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
-//        delete[] chrData;
+        //添加文件流
+        Cls_stuUserData userData(chrData, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, "", &userData, true, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加文件流"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        delete[] chrData;
 
-//        //获取文件
-//#ifdef Q_OS_WIN32
-//        char chrOutFile[] = "Camel_FileManagerC_Out.dll";
-//#endif
-//#ifdef Q_OS_LINUX
-//        char chrOutFile[] = "libCamel_FileManagerC_Out.so";
-//#endif
-//#ifdef Q_OS_OSX
-//        char chrOutFile[] = "libCamel_FileManagerC_Out.dylib";
-//#endif
-//        intError = Sub_FMInt->Cls_funManagerData_ExtractFile(&dBVerify, &dataType, chrOutFile, true);
-//        emit addInfo(QString("Cls_funManagerData_ExtractFile"), QStringLiteral(" 获取文件"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
-
-//    }
+        //获取文件
+#ifdef Q_OS_WIN32
+        char chrOutFile[] = "Camel_FileManagerC_Out.dll";
+#endif
+#ifdef Q_OS_LINUX
+        char chrOutFile[] = "libCamel_FileManagerC_Out.so";
+#endif
+#ifdef Q_OS_OSX
+        char chrOutFile[] = "libCamel_FileManagerC_Out.dylib";
+#endif
+        intError = Sub_FMInt->Cls_funManagerData_ExtractFile(&dBVerify, &dataType, chrOutFile, true);
+        emit addInfo(QString("Cls_funManagerData_ExtractFile"), QStringLiteral(" 获取文件"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
 
     {
         //添加短整型数组
@@ -539,31 +541,6 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取日期型数组大小"), QString::number(sizeof(double)*3), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     {
         //添加字符串型数组
         intSize = -1;
@@ -601,8 +578,55 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
         emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取字符串型数组大小"), QString::number(stringSize), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
     }
+}
+
+void CamelFileManagerCTestThread::Sub_subDataAllTest()
+{
+    int intError = clsFileManager_intErrorCode_Success;
+    string sDBPass = "newpass";
+    string sAppPath = QCoreApplication::applicationDirPath().toStdString() + "/";
+    string sDBFileName = sAppPath + "test.ztz";
+    Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
+    Cls_stuFunction fun(nullptr, nullptr);
+    int intSize = 0;
+
+    {
+        //获取数据大小列表
+        intSize = -1;
+        vector<int> aryDataSizeList;
+        Cls_stuFunction funSizeList(&Sub_funManagerData, this);
+        Cls_stuUserData userData(&aryDataSizeList, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_GetSizeList(&dBVerify, clsFileManager_intSizeType_DataSize, &funSizeList, &userData);
+        for (int i = 0; i < aryDataSizeList.size(); i++)
+        {
+            emit addInfo(QString("Cls_funManagerData_GetSizeList"), QStringLiteral(" 获取数据大小列表"), QString::number(i), QString::number(aryDataSizeList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        }
+    }
 
 
+    {
+        //获取数据名称列表
+        intSize = -1;
+        vector<string> aryDataNameList;
+        Cls_stuFunction funNameList(&Sub_funManagerData, this);
+        Cls_stuUserData userData(&aryDataNameList, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_GetNameList(&dBVerify, clsFileManager_intSizeType_DataSize, &funNameList, &userData);
+        for (int i = 0; i < aryDataNameList.size(); i++)
+        {
+            emit addInfo(QString("Cls_funManagerData_GetNameList"), QStringLiteral(" 获取数据名称列表"), QString::number(i), QString::number(aryDataNameList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        }
+    }
 
-
+    {
+        //获取数据类型列表
+        intSize = -1;
+        vector<int> aryDataTypeList;
+        Cls_stuFunction funTypeList(&Sub_funManagerData, this);
+        Cls_stuUserData userData(&aryDataTypeList, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_GetTypeList(&dBVerify, &funTypeList, &userData);
+        for (int i = 0; i < aryDataTypeList.size(); i++)
+        {
+            emit addInfo(QString("Cls_funManagerData_GetTypeList"), QStringLiteral(" 获取数据类型列表"), QString::number(i), QString::number(aryDataTypeList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        }
+    }
 }
