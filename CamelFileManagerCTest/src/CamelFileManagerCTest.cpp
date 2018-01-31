@@ -146,6 +146,7 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
     string sDBFileName = sAppPath + "test.ztz";
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
     Cls_stuFunction fun(nullptr, nullptr);
+    Cls_stuFunction funData(&Sub_funManagerData, this);
     int intSize = 0;
 
     {
@@ -299,8 +300,7 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         strString = "";
         intSize = 0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(strString), intSize);
-        Cls_stuFunction funString(&Sub_funManagerData, this);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funString, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取字符串型数据"), QStringLiteral("这是一段修改后的字符串abc"), QString::fromLocal8Bit(strString.c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
         //获取字符串型数据大小
@@ -383,9 +383,8 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
 
         //获取短整型数组
         aryShort.clear();
-        Cls_stuFunction funShort(&Sub_funManagerData, this);
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryShort), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funShort, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取短整型数组"), QString("222"), QString::number(aryShort.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取短整型数组"), QString("333"), QString::number(aryShort.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取短整型数组"), QString("444"), QString::number(aryShort.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
@@ -417,9 +416,8 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
 
         //获取整型数组
         aryInt.clear();
-        Cls_stuFunction funInt(&Sub_funManagerData, this);
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryInt), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funInt, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取整型数组"), QString("333"), QString::number(aryInt.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取整型数组"), QString("444"), QString::number(aryInt.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取整型数组"), QString("555"), QString::number(aryInt.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
@@ -451,9 +449,8 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
 
         //获取浮点型数组
         aryFloat.clear();
-        Cls_stuFunction funFloat(&Sub_funManagerData, this);
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryFloat), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funFloat, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取浮点型数组"), QString("234.56"), QString::number(aryFloat.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取浮点型数组"), QString("345.67"), QString::number(aryFloat.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取浮点型数组"), QString("456.78"), QString::number(aryFloat.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
@@ -485,9 +482,8 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
 
         //获取双浮点型数组
         aryDouble.clear();
-        Cls_stuFunction funDouble(&Sub_funManagerData, this);
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryDouble), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funDouble, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取双浮点型数组"), QString("345.67"), QString::number(aryDouble.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取双浮点型数组"), QString("456.78"), QString::number(aryDouble.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取双浮点型数组"), QString("567.89"), QString::number(aryDouble.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
@@ -522,9 +518,8 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
 
         //获取日期型数组
         aryDate.clear();
-        Cls_stuFunction funDate(&Sub_funManagerData, this);
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryDate), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funDate, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
         QString strTimeNow1 = QDateTime::fromMSecsSinceEpoch(dateTimeNow).toString("yyyy-MM-dd hh:mm:ss");
         QString strTimeNow2 = QDateTime::fromMSecsSinceEpoch(dateTimeNow+100).toString("yyyy-MM-dd hh:mm:ss");
         QString strTimeNow3 = QDateTime::fromMSecsSinceEpoch(dateTimeNow+200).toString("yyyy-MM-dd hh:mm:ss");
@@ -557,17 +552,16 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加字符串型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
         //修改字符串型数组
-        aryString.at(0) = "bcd";
-        aryString.at(1) = "中文";
-        aryString.at(2) = "中文bcd";
+        aryString.at(0) = "bcd------#";
+        aryString.at(1) = "中文------#";
+        aryString.at(2) = "中文bcd------#";
         intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
         emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改字符串型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 
         //获取字符串型数组
         vector<string> aryGetString;
-        Cls_stuFunction funString(&Sub_funManagerData, this);
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryGetString), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funString, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取字符串型数组"), QStringLiteral("bcd"), QString::fromLocal8Bit(aryGetString.at(0).c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取字符串型数组"), QStringLiteral("中文"), QString::fromLocal8Bit(aryGetString.at(1).c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取字符串型数组"), QStringLiteral("中文bcd"), QString::fromLocal8Bit(aryGetString.at(2).c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
@@ -588,15 +582,15 @@ void CamelFileManagerCTestThread::Sub_subDataAllTest()
     string sDBFileName = sAppPath + "test.ztz";
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
     Cls_stuFunction fun(nullptr, nullptr);
+    Cls_stuFunction funData(&Sub_funManagerData, this);
     int intSize = 0;
 
     {
         //获取数据大小列表
         intSize = -1;
         vector<int> aryDataSizeList;
-        Cls_stuFunction funSizeList(&Sub_funManagerData, this);
         Cls_stuUserData userData(&aryDataSizeList, intSize);
-        intError = Sub_FMInt->Cls_funManagerData_GetSizeList(&dBVerify, clsFileManager_intSizeType_DataSize, &funSizeList, &userData);
+        intError = Sub_FMInt->Cls_funManagerData_GetSizeList(&dBVerify, clsFileManager_intSizeType_DataSize, &funData, &userData);
         for (int i = 0; i < aryDataSizeList.size(); i++)
         {
             emit addInfo(QString("Cls_funManagerData_GetSizeList"), QStringLiteral(" 获取数据大小列表"), QString::number(i), QString::number(aryDataSizeList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
@@ -608,12 +602,12 @@ void CamelFileManagerCTestThread::Sub_subDataAllTest()
         //获取数据名称列表
         intSize = -1;
         vector<string> aryDataNameList;
-        Cls_stuFunction funNameList(&Sub_funManagerData, this);
         Cls_stuUserData userData(&aryDataNameList, intSize);
-        intError = Sub_FMInt->Cls_funManagerData_GetNameList(&dBVerify, clsFileManager_intSizeType_DataSize, &funNameList, &userData);
+        intError = Sub_FMInt->Cls_funManagerData_GetNameList(&dBVerify, clsFileManager_intNameType_Name, &funData, &userData);
         for (int i = 0; i < aryDataNameList.size(); i++)
         {
-            emit addInfo(QString("Cls_funManagerData_GetNameList"), QStringLiteral(" 获取数据名称列表"), QString::number(i), QString::number(aryDataNameList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+            string sTemp = aryDataNameList.at(i).c_str();
+            emit addInfo(QString("Cls_funManagerData_GetNameList"), QStringLiteral(" 获取数据名称列表"), QString::number(i), QString::fromLocal8Bit(sTemp.c_str()), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         }
     }
 
@@ -621,12 +615,40 @@ void CamelFileManagerCTestThread::Sub_subDataAllTest()
         //获取数据类型列表
         intSize = -1;
         vector<int> aryDataTypeList;
-        Cls_stuFunction funTypeList(&Sub_funManagerData, this);
         Cls_stuUserData userData(&aryDataTypeList, intSize);
-        intError = Sub_FMInt->Cls_funManagerData_GetTypeList(&dBVerify, &funTypeList, &userData);
+        intError = Sub_FMInt->Cls_funManagerData_GetTypeList(&dBVerify, &funData, &userData);
         for (int i = 0; i < aryDataTypeList.size(); i++)
         {
             emit addInfo(QString("Cls_funManagerData_GetTypeList"), QStringLiteral(" 获取数据类型列表"), QString::number(i), QString::number(aryDataTypeList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
         }
     }
+
+    {
+        //获取数据各类型总数列表
+        intSize = -1;
+        vector<int> aryDataTypeTotalNoList;
+        Cls_stuUserData userData(&aryDataTypeTotalNoList, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_GetTypeTotalNoList(&dBVerify, &funData, &userData);
+        for (int i = 0; i < aryDataTypeTotalNoList.size(); i++)
+        {
+            emit addInfo(QString("Cls_funManagerData_GetTypeTotalNoList"), QStringLiteral(" 获取数据各类型总数列表"), QString::number(i), QString::number(aryDataTypeTotalNoList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        }
+    }
+
+    {
+        //获取数据序号列表
+        intSize = -1;
+        vector<int> aryDataIndexList;
+        Cls_stuUserData userData(&aryDataIndexList, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_GetIndexList(&dBVerify, &funData, &userData);
+        for (int i = 0; i < aryDataIndexList.size(); i++)
+        {
+            emit addInfo(QString("Cls_funManagerData_GetIndexList"), QStringLiteral(" 获取数据序号列表"), QString::number(i), QString::number(aryDataIndexList.at(i)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        }
+    }
+
+    //获取数据库文件总数
+    int intFileNumber = 0;
+    intError = Sub_FMInt->Cls_funManagerDB_GetTotalNumber(&dBVerify, intFileNumber);
+    emit addInfo(QString("Cls_funManagerDB_GetTotalNumber"), QStringLiteral(" 获取数据库文件总数"), QString::number(0), QString::number(intFileNumber), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
 }
