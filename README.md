@@ -68,7 +68,7 @@ CamelDataManager: CamelFileManagerC数据库的可视化开发工具
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelDataManager/show2.png?raw=true)
 
 
-CamelFileManagerCTest: 文件管理开发组件测试程序
+CamelFileManagerCTest: 单峰驼组件测试程序
 
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelFileManagerCTest/show.png?raw=true)
 
