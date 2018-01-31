@@ -254,6 +254,32 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
     }
 
     {
+        //加入货币型数据
+        double cryCurrency = 1234.56;
+        Cls_stuDataType dataType(clsFileManager_intDataType_Currency, -1, "currency");
+        Cls_stuUserData userData(&cryCurrency, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 加入货币型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //修改货币型数据
+        cryCurrency = 1122.33;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改货币型数据"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取货币型数据
+        cryCurrency = 0.0;
+        intSize = 0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(cryCurrency), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &fun, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取货币型数据"), QString("1122.33"), QString::number(cryCurrency), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取货币型数据大小
+        intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
+        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取货币型数据大小"), QString::number(sizeof(double)), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
+
+    {
         //加入日期型数据
         double dateTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
         Cls_stuDataType dataType(clsFileManager_intDataType_Date, -1, "datetime");
@@ -495,6 +521,39 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
     }
 
     {
+        //添加货币型数组
+        intSize = -1;
+        vector<double> aryCurrency;
+        aryCurrency.push_back(234.56);
+        aryCurrency.push_back(345.67);
+        aryCurrency.push_back(456.78);
+        Cls_stuDataType dataType(clsFileManager_intDataType_CurrencyArray, -1, "currencyarray");
+        Cls_stuUserData userData(&aryCurrency, 0);
+        intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
+        emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加货币型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //修改货币型数组
+        aryCurrency.at(0) = 345.67;
+        aryCurrency.at(1) = 456.78;
+        aryCurrency.at(2) = 567.89;
+        intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &dataType, &userData, false);
+        emit addInfo(QString("Cls_funManagerData_Modify"), QStringLiteral(" 修改货币型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取货币型数组
+        aryCurrency.clear();
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(aryCurrency), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &dataType, &funData, &getUserData);
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取货币型数组"), QString("345.67"), QString::number(aryCurrency.at(0)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取货币型数组"), QString("456.78"), QString::number(aryCurrency.at(1)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+        emit addInfo(QString("Cls_funManagerData_Extract"), QStringLiteral(" 获取货币型数组"), QString("567.89"), QString::number(aryCurrency.at(2)), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+
+        //获取货币型数组大小
+        intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &dataType, intSize);
+        emit addInfo(QString("Cls_funManagerData_GetSize"), QStringLiteral(" 获取货币型数组大小"), QString::number(sizeof(double)*3), QString::number(intSize), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
+    }
+
+    {
         //添加日期型数组
         intSize = -1;
         double dateTime = QDateTime::currentDateTime().toMSecsSinceEpoch();
@@ -502,7 +561,7 @@ void CamelFileManagerCTestThread::Sub_subDataTest()
         aryDate.push_back(dateTime);
         aryDate.push_back(dateTime+100);
         aryDate.push_back(dateTime+200);
-        Cls_stuDataType dataType(clsFileManager_intDataType_Date, -1, "datearray");
+        Cls_stuDataType dataType(clsFileManager_intDataType_DateArray, -1, "datearray");
         Cls_stuUserData userData(&aryDate, 0);
         intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &dataType, nullptr, &userData, false, -1);
         emit addInfo(QString("Cls_funManagerData_Combine"), QStringLiteral(" 添加日期型数组"), QString("1"), QString::number(intError), (intError==1)?QStringLiteral("成功"):QStringLiteral("错误!!!"));
