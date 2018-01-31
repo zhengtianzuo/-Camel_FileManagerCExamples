@@ -67,6 +67,12 @@ CamelDataManager: CamelFileManagerC数据库的可视化开发工具
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelDataManager/show1.png?raw=true)
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelDataManager/show2.png?raw=true)
 
+
+CamelFileManagerCTest: 文件管理开发组件测试程序
+
+![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelFileManagerCTest/show.png?raw=true)
+
+
 CamelCrashReportTest: 崩溃报告开发组件测试程序
 ***
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelCrashReportTest/show.jpg?raw=true)
@@ -78,8 +84,8 @@ CamelCrashReportTest: 崩溃报告开发组件测试程序
 
 #### 计划加入的工程:
 ***
-1. CamelFileManagerCTest: 文件管理开发组件测试程序
-2. QmlSkins: Qml全局动态换肤
+1. QmlSkins: Qml全局动态换肤
+2. QmlPasswdKeeper: Qml密码管理软件
 
 
 
