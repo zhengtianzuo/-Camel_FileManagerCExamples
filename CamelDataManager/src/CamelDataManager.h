@@ -1,0 +1,26 @@
+﻿/*!
+ *@file CamelDataManager.h
+ *@brief CamelDataManager
+ *@version 1.0
+ *@section LICENSE Copyright (C) 2003-2103 CamelSoft Corporation
+ *@author zhengtianzuo
+*/
+#pragma once
+#include <QObject>
+#include "../../CamelFileManagerCDll/Camel_FileManagerCInterface.h"
+#include "DataTableView.h"
+
+class CamelDataManager : public QObject
+{
+    Q_OBJECT
+public:
+    CamelDataManager();
+    ~CamelDataManager();
+
+    DataTableViewModel* getTableData();
+
+private:
+    DataTableViewModel* m_tableData;
+    Camel_FileManagerCInterface *Sub_FMInterface;
+    Camel_FileManagerCInt* Sub_FMInt;
+};

@@ -8,7 +8,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "src/DataTableView.h"
+#include "src/CamelDataManager.h"
 
 int main(int argc, char *argv[])
 {
@@ -16,12 +16,8 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-    DataTableViewModel tableData;
-    for (int i = 0; i < 100; i++)
-    {
-        tableData.add(QStringLiteral("这是一个数据"), QStringLiteral("字符串数组"), QStringLiteral("12.53M"));
-    }
-    engine.rootContext()->setContextProperty("tableData", &tableData);
+    CamelDataManager cDataManager;
+    engine.rootContext()->setContextProperty("tableData", cDataManager.getTableData());
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     return app.exec();
 }
