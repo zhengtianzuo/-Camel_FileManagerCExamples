@@ -88,7 +88,22 @@ Rectangle{
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("新建")
             onSClicked: {
-
+                if (dbName.inputText.length === 0){
+                    return;
+                }
+                if (dbPass.inputText.length === 0){
+                    return;
+                }
+                if (dbrePass.inputText.length === 0){
+                    return;
+                }
+                if (dbPass.inputText !== dbrePass.inputText){
+                    return;
+                }
+                if (ldbPath.inputText.length === 0){
+                    return;
+                }
+                cDataManager.cls_funManagerDB_CreateDataBase(dbName.inputText, dbPass.inputText, ldbPath.inputText);
             }
         }
     }

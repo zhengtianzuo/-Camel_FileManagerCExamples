@@ -21,7 +21,7 @@ int DataTableViewModel::rowCount(const QModelIndex &parent) const
 int DataTableViewModel::columnCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    return(EndRole);
+    return(TEndRole);
 }
 
 QVariant DataTableViewModel::data(const QModelIndex &index, int role) const
@@ -35,9 +35,9 @@ QVariant DataTableViewModel::data(const QModelIndex &index, int role) const
 QHash<int, QByteArray> DataTableViewModel::roleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[NameRole] = "name";
-    roles[TypeRole] = "type";
-    roles[SizeRole] = "size";
+    roles[TNameRole] = "name";
+    roles[TTypeRole] = "type";
+    roles[TSizeRole] = "size";
     return roles;
 }
 

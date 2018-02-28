@@ -9,11 +9,11 @@
 #include <QAbstractTableModel>
 #include <QVector>
 
-enum Role {
-    NameRole,
-    TypeRole,
-    SizeRole,
-    EndRole
+enum DataTableViewRole {
+    TNameRole,
+    TTypeRole,
+    TSizeRole,
+    TEndRole
 };
 
 class DataTableViewModel : public QAbstractTableModel
@@ -30,6 +30,7 @@ public:
     Q_INVOKABLE void set(int row, int column, QString strText);
     Q_INVOKABLE void del(int row);
     Q_INVOKABLE void refresh();
+
 private:
    QVector<QVector<QString>> m_aryData;
 };

@@ -17,7 +17,9 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     CamelDataManager cDataManager;
+    engine.rootContext()->setContextProperty("listData", cDataManager.getListData());
     engine.rootContext()->setContextProperty("tableData", cDataManager.getTableData());
+    engine.rootContext()->setContextProperty("cDataManager", &cDataManager);
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
     return app.exec();
 }

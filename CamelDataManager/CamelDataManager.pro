@@ -21,7 +21,8 @@ CONFIG(debug, debug|release) {
 SOURCES += \
     $$PWD/main.cpp \
     $$PWD/src/DataTableView.cpp \
-    $$PWD/src/CamelDataManager.cpp
+    $$PWD/src/CamelDataManager.cpp \
+    src/DataListView.cpp
 
 RESOURCES += qml.qrc
 
@@ -29,4 +30,5 @@ HEADERS += \
     $$PWD/../CamelFileManagerCDll/Camel_FileManagerC.h \
     $$PWD/../CamelFileManagerCDll/Camel_FileManagerCInterface.h \
     $$PWD/src/DataTableView.h \
-    $$PWD/src/CamelDataManager.h
+    $$PWD/src/CamelDataManager.h \
+    src/DataListView.h

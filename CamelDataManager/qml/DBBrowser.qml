@@ -14,71 +14,6 @@ Page{
 
     id: dbs
 
-    ListModel {
-        id: listModel
-
-        ListElement {
-            text: qsTr("111222333随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("AAABBBCCC随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("DDDEEEFFF随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("GGGHHHIII随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("JJJKKKLLL随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("111222333随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("AAABBBCCC随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("DDDEEEFFF随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("GGGHHHIII随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("JJJKKKLLL随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("111222333随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("AAABBBCCC随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("DDDEEEFFF随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("GGGHHHIII随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("JJJKKKLLL随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("111222333随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("AAABBBCCC随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("DDDEEEFFF随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("GGGHHHIII随便的一些内容")
-        }
-        ListElement {
-            text: qsTr("JJJKKKLLL随便的一些内容")
-        }
-    }
-
     Component{
         id: listDelegate
         Rectangle{
@@ -95,7 +30,7 @@ Page{
                 font.family: "microsoft yahei"
                 font.pointSize: 12
                 anchors.fill: parent
-                text: model.text
+                text: model.name
                 color: "#148014"
                 verticalAlignment: Text.AlignVCenter
             }
@@ -115,16 +50,16 @@ Page{
                 }
                 onReleased: {
                     label.color = "#148014"
-                    console.debug("fromIndex: ", listItem.fromIndex, "toIndex: ", listItem.toIndex);
+                    if (listItem.fromIndex !== listItem.toIndex){
+                        listData.move(listItem.fromIndex, listItem.toIndex);
+                    }
+                    //console.debug("fromIndex: ", listItem.fromIndex, "toIndex: ", listItem.toIndex);
                 }
                 onMouseYChanged: {
                     var lastIndex = listview.indexAt(mousearea.mouseX + listItem.x,
                                                      mousearea.mouseY + listItem.y);
-                    if ((lastIndex < 0) || (lastIndex > listModel.rowCount()))
+                    if ((lastIndex < 0) || (lastIndex > listData.rowCount()))
                         return;
-                    if (index !== lastIndex){
-                        listModel.move(index, lastIndex, 1);
-                    }
                     listItem.toIndex = lastIndex;
                 }
             }
@@ -141,7 +76,7 @@ Page{
         anchors.bottomMargin: defaultMargin
         anchors.left: parent.left
         anchors.leftMargin: defaultMargin
-        model: listModel
+        model: listData
         delegate: listDelegate
         interactive: false
     }

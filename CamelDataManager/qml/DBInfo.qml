@@ -62,7 +62,7 @@ Rectangle {
                 showText: qsTr("路径:")
                 inputWidth: parent.width-showWidth-defaultMargin*3
                 Component.onCompleted: {
-                    ldbPath.inputText = qsTr("C:/Program Files (x86)/Microsoft SDKs/Windows Kits/10/ExtensionSDKs/Microsoft.VCLibs/14.0/Appx/Retail/x86/Microsoft.VCLibs.x86.14.00.appx")
+                    ldbPath.inputText = qsTr("")
                     ldbPath.tNameCursorPos = 0
                 }
             }
