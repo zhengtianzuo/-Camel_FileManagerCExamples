@@ -22,6 +22,7 @@ public:
     DataListViewModel* getListData();
 
     Q_INVOKABLE void cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath);
+    Q_INVOKABLE void Cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath, bool bAdd = false);
 
 private:
     DataTableViewModel* m_tableData;

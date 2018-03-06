@@ -24,6 +24,7 @@ Rectangle{
             path = path.replace(/^(file:\/{3})/,"");
             ldbPath.inputText = path;
             ldbPath.tNameCursorPos = 0
+
         }
     }
 

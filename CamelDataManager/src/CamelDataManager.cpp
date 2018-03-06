@@ -14,15 +14,15 @@ CamelDataManager::CamelDataManager()
     Sub_FMInt->Cls_funManagerInitialize();
     clsFileManager_CmdMapInit();
     m_tableData = new DataTableViewModel();
-//    for (int i = 0; i < 100; i++)
-//    {
-//        m_tableData->add(QStringLiteral("数据")+QString::number(i), QStringLiteral("文件"), QStringLiteral("1.234M"));
-//    }
+    //    for (int i = 0; i < 100; i++)
+    //    {
+    //        m_tableData->add(QStringLiteral("数据")+QString::number(i), QStringLiteral("文件"), QStringLiteral("1.234M"));
+    //    }
     m_listData = new DataListViewModel();
-//    for (int i = 0; i < 100; i++)
-//    {
-//        m_listData->add(QStringLiteral("名称")+QString::number(i), QStringLiteral("路径"));
-//    }
+    //    for (int i = 0; i < 100; i++)
+    //    {
+    //        m_listData->add(QStringLiteral("名称")+QString::number(i), QStringLiteral("路径"));
+    //    }
 }
 
 CamelDataManager::~CamelDataManager()
@@ -55,5 +55,21 @@ void CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString 
     if (intError == clsFileManager_intErrorCode_Success)
     {
         m_listData->add(strName, strPath);
+    }
+}
+
+void CamelDataManager::Cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath, bool bAdd)
+{
+    string sDBPass = strPass.toStdString();
+    string sAppPath = strPath.toLocal8Bit();
+
+    Cls_stuDBVerify dBVerify(sAppPath.c_str(), sDBPass.c_str());
+    int intError = Sub_FMInt->Cls_funManagerDB_OpenDataBase(&dBVerify);
+    if (intError == clsFileManager_intErrorCode_Success)
+    {
+        if (bAdd == true)
+        {
+            m_listData->add(strName, strPath);
+        }
     }
 }
