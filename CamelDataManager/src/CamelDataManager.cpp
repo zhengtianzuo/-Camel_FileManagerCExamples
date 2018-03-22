@@ -6,6 +6,7 @@
  *@author zhengtianzuo
 */
 #include "CamelDataManager.h"
+#include <QFileInfo>
 
 CamelDataManager::CamelDataManager()
 {
@@ -43,12 +44,12 @@ DataListViewModel *CamelDataManager::getListData()
     return (m_listData);
 }
 
-void CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath)
+int CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath)
 {
     string sDBName = strName.toLocal8Bit();
     string sDBPass = strPass.toStdString();
     string sAppPath = strPath.toLocal8Bit();
-    string sDBFileName = sAppPath + sDBName + ".ztz";
+    string sDBFileName = sAppPath + sDBName + DBSuffix.toStdString();
 
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
     int intError = Sub_FMInt->Cls_funManagerDB_CreateDataBase(&dBVerify, sDBName.c_str(), true);
@@ -56,9 +57,10 @@ void CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString 
     {
         m_listData->add(strName, strPath);
     }
+    return(intError);
 }
 
-void CamelDataManager::Cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath, bool bAdd)
+int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath)
 {
     string sDBPass = strPass.toStdString();
     string sAppPath = strPath.toLocal8Bit();
@@ -67,9 +69,14 @@ void CamelDataManager::Cls_funManagerDB_OpenDataBase(QString strName, QString st
     int intError = Sub_FMInt->Cls_funManagerDB_OpenDataBase(&dBVerify);
     if (intError == clsFileManager_intErrorCode_Success)
     {
-        if (bAdd == true)
+        if (strName.length() == 0)
         {
-            m_listData->add(strName, strPath);
+            QFileInfo fileInfo;
+            fileInfo.setFile(strPath);
+            strName = fileInfo.fileName();
+            strName = strName.replace(DBSuffix, "");
         }
+        m_listData->add(strName, strPath);
     }
+    return(intError);
 }

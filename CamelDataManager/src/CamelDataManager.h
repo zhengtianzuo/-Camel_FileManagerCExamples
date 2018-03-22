@@ -11,6 +11,8 @@
 #include "DataTableView.h"
 #include "DataListView.h"
 
+const QString DBSuffix = ".Ztz";
+
 class CamelDataManager : public QObject
 {
     Q_OBJECT
@@ -21,8 +23,8 @@ public:
     DataTableViewModel* getTableData();
     DataListViewModel* getListData();
 
-    Q_INVOKABLE void cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath);
-    Q_INVOKABLE void Cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath, bool bAdd = false);
+    Q_INVOKABLE int cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath);
+    Q_INVOKABLE int cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath);
 
 private:
     DataTableViewModel* m_tableData;

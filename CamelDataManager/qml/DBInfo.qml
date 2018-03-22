@@ -69,6 +69,7 @@ Rectangle {
         }
 
         ChartView {
+            visible: false
             height: parent.height - dbInfo.height - dbpath.height
             width: parent.width
             theme: ChartView.ChartThemeQt
