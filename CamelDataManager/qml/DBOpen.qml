@@ -16,6 +16,16 @@ Rectangle{
     border.color: "#148014"
     border.width: 1
 
+    function showMsg(text){
+        msg.text = text;
+        msg.open();
+    }
+
+    MessageDialog{
+        id: msg
+        buttons: MessageDialog.Ok
+    }
+
     FileDialog {
         id: fileDialog
         fileMode: FileDialog.OpenFile
