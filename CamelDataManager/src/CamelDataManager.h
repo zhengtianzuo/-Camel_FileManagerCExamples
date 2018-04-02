@@ -26,6 +26,7 @@ public:
     Q_INVOKABLE int cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath);
     Q_INVOKABLE int cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath);
     Q_INVOKABLE int cls_funManagerDB_SetName(QString strDBName);
+    Q_INVOKABLE int cls_funManagerDB_ChangePassword(QString strNewPass);
 
 signals:
     void sOpenDataBase(QString strName, QString strPath);

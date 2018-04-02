@@ -101,3 +101,15 @@ int CamelDataManager::cls_funManagerDB_SetName(QString strDBName)
     }
     return(intError);
 }
+
+int CamelDataManager::cls_funManagerDB_ChangePassword(QString strNewPass)
+{
+    string sDBPass = strNewPass.toStdString();
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    int intError = Sub_FMInt->Cls_funManagerDB_ChangePassword(&dBVerify, m_strCurDBPass.c_str(), sDBPass.c_str());
+    if (intError == clsFileManager_intErrorCode_Success)
+    {
+
+    }
+    return(intError);
+}

@@ -48,20 +48,12 @@ Rectangle{
                         message.showMsg(qsTr("请输入数据库的名称"));
                         return;
                     }
-
-                    cDataManager.cls_funManagerDB_SetName(dbName.inputText);
+                    var intError = cDataManager.cls_funManagerDB_SetName(dbName.inputText);
+                    if (intError !== 1){
+                        message.showMsg(qsTr("修改数据库名称错误, 错误码: ") + intError);
+                    }
                 }
             }
-        }
-
-        BaseTextField{
-            id: dboldPass
-            showText: qsTr("原密码:")
-            showWidth: 80
-            inputText: qsTr("")
-            inputWidth: parent.width-showWidth-defaultMargin*3
-            readOnly: false
-            echoMode: TextInput.Password
         }
 
         BaseTextField{
@@ -93,7 +85,22 @@ Rectangle{
                 anchors.rightMargin: defaultMargin
                 text: qsTr("修改密码")
                 onSClicked: {
-
+                    if (dbPass.inputText.length === 0){
+                        message.showMsg(qsTr("请输入数据库的密码"));
+                        return;
+                    }
+                    if (dbrePass.inputText.length === 0){
+                        message.showMsg(qsTr("请再次输入数据库的密码"));
+                        return;
+                    }
+                    if (dbPass.inputText !== dbrePass.inputText){
+                        message.showMsg(qsTr("两次输入的密码不相同"));
+                        return;
+                    }
+                    var intError = cDataManager.cls_funManagerDB_ChangePassword(dbrePass.inputText);
+                    if (intError !== 1){
+                        message.showMsg(qsTr("修改数据库密码错误, 错误码: ") + intError);
+                    }
                 }
             }
         }
