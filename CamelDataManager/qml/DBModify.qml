@@ -11,6 +11,14 @@ import QtQuick.Controls 2.0
 Rectangle{
     property int defaultMargin: 6
 
+    function onSOpenDataBase(strName, strPath){
+        dbName.inputText = strName;
+    }
+
+    BaseMessageDialog{
+        id: message
+    }
+
     id: frmWindow
     border.color: "#148014"
     border.width: 1
@@ -24,7 +32,7 @@ Rectangle{
             width: parent.width
             showText: qsTr("名称:")
             showWidth: 80
-            inputText: qsTr("数据库的名称")
+            inputText: qsTr("")
             inputWidth: parent.width-showWidth-defaultMargin*3 - btnModifyName.width
 
             BaseButton{
@@ -36,7 +44,12 @@ Rectangle{
                 anchors.rightMargin: defaultMargin
                 text: qsTr("修改名称")
                 onSClicked: {
+                    if (dbName.inputText.length === 0){
+                        message.showMsg(qsTr("请输入数据库的名称"));
+                        return;
+                    }
 
+                    cDataManager.cls_funManagerDB_SetName(dbName.inputText);
                 }
             }
         }

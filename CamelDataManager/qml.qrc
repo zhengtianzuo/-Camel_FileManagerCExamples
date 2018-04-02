@@ -59,5 +59,6 @@
         <file>qml/BasePageNavigation.qml</file>
         <file>images/arrow.png</file>
         <file>images/SilkStyle_Back.png</file>
+        <file>qml/BaseMessageDialog.qml</file>
     </qresource>
 </RCC>

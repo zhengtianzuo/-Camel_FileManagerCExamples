@@ -38,24 +38,38 @@ Rectangle {
             }
 
             DBNew{
+                id: dbnew
                 visible: SwipeView.isCurrentItem
             }
 
             DBOpen{
+                id: dbopen
                 visible: SwipeView.isCurrentItem
             }
 
             DBModify{
+                id: dbmodify
                 visible: SwipeView.isCurrentItem
             }
 
             DBCompress{
+                id: dbcompress
                 visible: SwipeView.isCurrentItem
             }
 
             DBDelete{
+                id: dbdelete
                 visible: SwipeView.isCurrentItem
             }
+        }
+    }
+
+    Connections{
+        target: cDataManager
+        onSOpenDataBase: {
+            dbnew.onSOpenDataBase(strName, strPath);
+            dbopen.onSOpenDataBase(strName, strPath);
+            dbmodify.onSOpenDataBase(strName, strPath);
         }
     }
 }

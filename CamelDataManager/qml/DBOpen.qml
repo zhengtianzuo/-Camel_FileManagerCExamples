@@ -12,18 +12,16 @@ import Qt.labs.platform 1.0
 Rectangle{
     property int defaultMargin: 6
 
+    function onSOpenDataBase(strName, strPath){
+        ldbPath.inputText = strPath;
+    }
+
     id: frmWindow
     border.color: "#148014"
     border.width: 1
 
-    function showMsg(text){
-        msg.text = text;
-        msg.open();
-    }
-
-    MessageDialog{
-        id: msg
-        buttons: MessageDialog.Ok
+    BaseMessageDialog{
+        id: message
     }
 
     FileDialog {
@@ -35,16 +33,16 @@ Rectangle{
             ldbPath.inputText = path;
             ldbPath.tNameCursorPos = 0
             if (dbPass.inputText.length === 0){
-                showMsg(qsTr("请输入数据库的密码"));
+                message.showMsg(qsTr("请输入数据库的密码"));
                 return;
             }
             if (ldbPath.inputText.length === 0){
-                showMsg(qsTr("请输入数据库的路径"));
+                message.showMsg(qsTr("请输入数据库的路径"));
                 return;
             }
             var intError = cDataManager.cls_funManagerDB_OpenDataBase("", dbPass.inputText, ldbPath.inputText);
             if (intError !== 1){
-                showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
+                message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
             }
         }
     }

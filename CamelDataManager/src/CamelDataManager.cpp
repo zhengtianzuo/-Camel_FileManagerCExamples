@@ -56,16 +56,21 @@ int CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString s
     if (intError == clsFileManager_intErrorCode_Success)
     {
         m_listData->add(strName, strPath);
+        m_strCurDBName = sDBName;
+        m_strCurDBPass = sDBPass;
+        m_strCurDBPath = sDBFileName;
     }
     return(intError);
 }
 
 int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath)
 {
+    string sDBName = strName.toLocal8Bit();
     string sDBPass = strPass.toStdString();
     string sAppPath = strPath.toLocal8Bit();
+    string sDBFileName = sAppPath + sDBName + DBSuffix.toStdString();
 
-    Cls_stuDBVerify dBVerify(sAppPath.c_str(), sDBPass.c_str());
+    Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
     int intError = Sub_FMInt->Cls_funManagerDB_OpenDataBase(&dBVerify);
     if (intError == clsFileManager_intErrorCode_Success)
     {
@@ -77,6 +82,22 @@ int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString str
             strName = strName.replace(DBSuffix, "");
         }
         m_listData->add(strName, strPath);
+        m_strCurDBName = sDBName;
+        m_strCurDBPass = sDBPass;
+        m_strCurDBPath = sDBFileName;
+        emit sOpenDataBase(strName, strPath);
+    }
+    return(intError);
+}
+
+int CamelDataManager::cls_funManagerDB_SetName(QString strDBName)
+{
+    string sDBName = strDBName.toLocal8Bit();
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    int intError = Sub_FMInt->Cls_funManagerDB_SetName(&dBVerify, sDBName.c_str());
+    if (intError == clsFileManager_intErrorCode_Success)
+    {
+
     }
     return(intError);
 }

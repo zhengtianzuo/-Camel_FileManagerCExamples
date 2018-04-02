@@ -12,18 +12,17 @@ import Qt.labs.platform 1.0
 Rectangle{
     property int defaultMargin: 6
 
+    function onSOpenDataBase(strName, strPath){
+        dbName.inputText = strName;
+        ldbPath.inputText = strPath;
+    }
+
     id: frmWindow
     border.color: "#148014"
     border.width: 1
 
-    function showMsg(text){
-        msg.text = text;
-        msg.open();
-    }
-
-    MessageDialog{
-        id: msg
-        buttons: MessageDialog.Ok
+    BaseMessageDialog{
+        id: message
     }
 
     FolderDialog {
@@ -44,7 +43,7 @@ Rectangle{
             id: dbName
             showText: qsTr("名称:")
             showWidth: 80
-            inputText: qsTr("数据库的名称")
+            inputText: qsTr("")
             inputWidth: parent.width-showWidth-defaultMargin*3
             readOnly: false
         }
@@ -99,32 +98,32 @@ Rectangle{
             text: qsTr("新建")
             onSClicked: {
                 if (dbName.inputText.length === 0){
-                    showMsg(qsTr("请输入数据库的名称"));
+                    message.showMsg(qsTr("请输入数据库的名称"));
                     return;
                 }
                 if (dbPass.inputText.length === 0){
-                    showMsg(qsTr("请输入数据库的密码"));
+                    message.showMsg(qsTr("请输入数据库的密码"));
                     return;
                 }
                 if (dbrePass.inputText.length === 0){
-                    showMsg(qsTr("请再次输入数据库的密码"));
+                    message.showMsg(qsTr("请再次输入数据库的密码"));
                     return;
                 }
                 if (dbPass.inputText !== dbrePass.inputText){
-                    showMsg(qsTr("两次输入的密码不相同"));
+                    message.showMsg(qsTr("两次输入的密码不相同"));
                     return;
                 }
                 if (ldbPath.inputText.length === 0){
-                    showMsg(qsTr("请输入数据库的路径"));
+                    message.showMsg(qsTr("请输入数据库的路径"));
                     return;
                 }
                 var intError = cDataManager.cls_funManagerDB_CreateDataBase(dbName.inputText, dbPass.inputText, ldbPath.inputText);
                 if (intError !== 1){
-                    showMsg(qsTr("创建数据库错误, 错误码: ") + intError);
+                    message.showMsg(qsTr("创建数据库错误, 错误码: ") + intError);
                 }
                 intError = cDataManager.cls_funManagerDB_OpenDataBase(dbName.inputText, dbPass.inputText, ldbPath.inputText);
                 if (intError !== 1){
-                    showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
+                    message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
                 }
             }
         }

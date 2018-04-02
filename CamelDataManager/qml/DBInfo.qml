@@ -29,7 +29,7 @@ Rectangle {
             BaseTextField{
                 id: dbName
                 showText: qsTr("名称:")
-                inputText: qsTr("数据库的名称")
+                inputText: qsTr("")
                 inputWidth: parent.width-dbNum.width-dbSize.width-showWidth-defaultMargin*3
             }
 
@@ -37,7 +37,7 @@ Rectangle {
                 id: dbNum
                 anchors.left: dbName.right
                 showText: qsTr("文件数:")
-                inputText: qsTr("99")
+                inputText: qsTr("")
                 inputWidth: 60
             }
 
@@ -45,7 +45,7 @@ Rectangle {
                 id: dbSize
                 anchors.left: dbNum.right
                 showText: qsTr("大小:")
-                inputText: qsTr("1.25M")
+                inputText: qsTr("")
                 inputWidth: 80
             }
         }
