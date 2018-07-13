@@ -26,6 +26,16 @@ ApplicationWindow {
         source: "qrc:/images/SilkStyle_Back.png"
     }
 
+    Image{
+        height: 24
+        width: 24
+        anchors.left: parent.left
+        anchors.leftMargin: defaultMargin
+        anchors.top: parent.top
+        anchors.topMargin: defaultMargin
+        source: "qrc:/dromedary.ico"
+    }
+
     MouseArea{
         anchors.fill: parent
         property point clickPos: "0,0"
@@ -40,7 +50,9 @@ ApplicationWindow {
     }
 
     Column{
-        height: parent.height
+        anchors.top: parent.top
+        anchors.topMargin: defaultMargin
+        height: parent.height - defaultMargin*2
         width: parent.width
 
         Row{
@@ -92,7 +104,7 @@ ApplicationWindow {
 
         SwipeView {
             id: view
-            height: frmWindow.height - bar.height - rowBtn.height
+            height: frmWindow.height - bar.height - rowBtn.height - defaultMargin*2
             width: parent.width
             currentIndex: bar.currentIndex
             interactive: false

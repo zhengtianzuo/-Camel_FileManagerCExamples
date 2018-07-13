@@ -32,3 +32,7 @@ HEADERS += \
     $$PWD/src/DataTableView.h \
     $$PWD/src/CamelDataManager.h \
     src/DataListView.h
+
+win32{
+    RC_FILE = $$PWD/CamelDataManager.rc
+}

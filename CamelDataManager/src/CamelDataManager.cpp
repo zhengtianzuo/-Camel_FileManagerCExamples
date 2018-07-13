@@ -65,6 +65,8 @@ int CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString s
 
 int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString strPass, QString strPath)
 {
+    if (strName.endsWith(DBSuffix)) strName.replace(DBSuffix, "");
+    if (strPath.endsWith(DBSuffix)) strPath.replace(DBSuffix, "");
     string sDBName = strName.toLocal8Bit();
     string sDBPass = strPass.toStdString();
     string sAppPath = strPath.toLocal8Bit();
@@ -108,5 +110,5 @@ int CamelDataManager::cls_funManagerDB_ChangePassword(QString strNewPass)
 
 int CamelDataManager::cls_funManagerDB_CheckSpace()
 {
-
+    return(0);
 }

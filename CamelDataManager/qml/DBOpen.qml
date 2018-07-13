@@ -24,6 +24,16 @@ Rectangle{
         id: message
     }
 
+    DBPass{
+        id: dBPass
+        onSinputText:{
+            var intError = cDataManager.cls_funManagerDB_OpenDataBase("", inputText, ldbPath.inputText);
+            if (intError !== 1){
+                message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
+            }
+        }
+    }
+
     FileDialog {
         id: fileDialog
         fileMode: FileDialog.OpenFile
@@ -32,18 +42,11 @@ Rectangle{
             path = path.replace(/^(file:\/{3})/,"");
             ldbPath.inputText = path;
             ldbPath.tNameCursorPos = 0
-            if (dbPass.inputText.length === 0){
-                message.showMsg(qsTr("请输入数据库的密码"));
-                return;
-            }
             if (ldbPath.inputText.length === 0){
                 message.showMsg(qsTr("请输入数据库的路径"));
                 return;
             }
-            var intError = cDataManager.cls_funManagerDB_OpenDataBase("", dbPass.inputText, ldbPath.inputText);
-            if (intError !== 1){
-                message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
-            }
+            dBPass.showWindow();
         }
     }
 
@@ -71,16 +74,6 @@ Rectangle{
                     fileDialog.open();
                 }
             }
-        }
-
-        BaseTextField{
-            id: dbPass
-            showText: qsTr("密码:")
-            showWidth: 80
-            inputText: qsTr("")
-            inputWidth: parent.width-showWidth-defaultMargin*3
-            readOnly: false
-            echoMode: TextInput.Password
         }
     }
 }

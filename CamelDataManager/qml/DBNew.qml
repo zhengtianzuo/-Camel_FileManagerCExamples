@@ -30,7 +30,7 @@ Rectangle{
         onAccepted: {
             var path = folderDialog.currentFolder.toString();
             path = path.replace(/^(file:\/{3})/,"");
-            ldbPath.inputText = path;
+            ldbPath.inputText = path + "/";
             ldbPath.tNameCursorPos = 0
         }
     }
@@ -125,6 +125,7 @@ Rectangle{
                 if (intError !== 1){
                     message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
                 }
+                message.showMsg(qsTr("新建数据库完成"));
             }
         }
     }
