@@ -9,6 +9,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 
 ApplicationWindow {
+
     property int defaultMargin: 6
 
     id: frmWindow
@@ -34,6 +35,17 @@ ApplicationWindow {
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
         source: "qrc:/dromedary.ico"
+    }
+
+    Text{
+        anchors.left: parent.left
+        anchors.leftMargin: 36
+        height: 36
+        text: qsTr("单峰驼数据库IDE")
+        font.family: "Microsoft YaHei"
+        font.pixelSize: 15
+        verticalAlignment: Text.AlignVCenter
+        color: "#148014"
     }
 
     MouseArea{
