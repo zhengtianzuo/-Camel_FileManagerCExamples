@@ -21,9 +21,19 @@ ApplicationWindow {
     font.family: "Microsoft YaHei"
     font.pixelSize: 15
 
+    Rectangle{
+        z:1
+        anchors.fill: parent
+        color: "transparent"
+        border.color: "#aaaaaa"
+        border.width: 1
+    }
+
     Image {
         id: imgBack
-        anchors.fill: parent
+        height: parent.height - defaultMargin
+        width: parent.width - defaultMargin
+        anchors.centerIn: parent
         source: "qrc:/images/SilkStyle_Back.png"
     }
 
@@ -62,10 +72,10 @@ ApplicationWindow {
     }
 
     Column{
-        anchors.top: parent.top
-        anchors.topMargin: defaultMargin
+        anchors.margins: 1
         height: parent.height - defaultMargin*2
-        width: parent.width
+        width: parent.width - 2
+        anchors.centerIn: parent
 
         Row{
             id: rowBtn

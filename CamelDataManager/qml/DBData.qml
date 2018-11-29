@@ -15,8 +15,10 @@ Rectangle{
 
     Row{
         id: rowData
-        height: parent.height - control.height
-        width: parent.width
+        height: parent.height - control.height - defaultMargin*2
+        width: parent.width - defaultMargin*2
+        anchors.margins: defaultMargin
+        anchors.horizontalCenter: parent.horizontalCenter
         spacing: defaultMargin
 
         BaseTableView{
@@ -72,8 +74,9 @@ Rectangle{
         id: control
         anchors.top: rowData.bottom
         anchors.topMargin: defaultMargin
+        anchors.horizontalCenter: parent.horizontalCenter
         height: 48
-        width: parent.width
+        width: parent.width - defaultMargin*2
         border.color: "#148014"
         border.width: 1
 
