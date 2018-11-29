@@ -46,9 +46,9 @@ DataListViewModel *CamelDataManager::getListData()
 
 int CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath)
 {
-    string sDBName = strName.toLocal8Bit();
+    string sDBName = strName.toLocal8Bit().toStdString();
     string sDBPass = strPass.toStdString();
-    string sAppPath = strPath.toLocal8Bit();
+    string sAppPath = strPath.toLocal8Bit().toStdString();
     string sDBFileName = sAppPath + sDBName + DBSuffix.toStdString();
 
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
@@ -67,9 +67,9 @@ int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString str
 {
     if (strName.endsWith(DBSuffix)) strName.replace(DBSuffix, "");
     if (strPath.endsWith(DBSuffix)) strPath.replace(DBSuffix, "");
-    string sDBName = strName.toLocal8Bit();
+    string sDBName = strName.toLocal8Bit().toStdString();
     string sDBPass = strPass.toStdString();
-    string sAppPath = strPath.toLocal8Bit();
+    string sAppPath = strPath.toLocal8Bit().toStdString();
     string sDBFileName = sAppPath + sDBName + DBSuffix.toStdString();
 
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
@@ -94,7 +94,7 @@ int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString str
 
 int CamelDataManager::cls_funManagerDB_SetName(QString strDBName)
 {
-    string sDBName = strDBName.toLocal8Bit();
+    string sDBName = strDBName.toLocal8Bit().toStdString();
     Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     int intError = Sub_FMInt->Cls_funManagerDB_SetName(&dBVerify, sDBName.c_str());
     return(intError);
