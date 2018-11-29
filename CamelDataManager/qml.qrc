@@ -62,5 +62,6 @@
         <file>qml/BaseMessageDialog.qml</file>
         <file>qml/DBPass.qml</file>
         <file>dromedary.ico</file>
+        <file>qml/DBNewData.qml</file>
     </qresource>
 </RCC>

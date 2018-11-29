@@ -15,9 +15,10 @@ Rectangle{
 
     Row{
         id: rowData
-        height: parent.height - control.height - defaultMargin*2
+        height: parent.height - control.height - defaultMargin*3
         width: parent.width - defaultMargin*2
         anchors.margins: defaultMargin
+        anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         spacing: defaultMargin
 
@@ -119,9 +120,13 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("添加")
                 onSClicked: {
-
+                    dBNewData.showNormal();
                 }
             }
         }
+    }
+
+    DBNewData{
+        id: dBNewData
     }
 }
