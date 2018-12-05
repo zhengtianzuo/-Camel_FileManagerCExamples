@@ -38,8 +38,8 @@ ApplicationWindow {
     }
 
     Image{
-        height: 24
-        width: 24
+        height: 32
+        width: 32
         anchors.left: parent.left
         anchors.leftMargin: defaultMargin
         anchors.top: parent.top
@@ -49,9 +49,9 @@ ApplicationWindow {
 
     Text{
         anchors.left: parent.left
-        anchors.leftMargin: 36
-        height: 36
-        text: qsTr("单峰驼数据库IDE")
+        anchors.leftMargin: 48
+        height: 48
+        text: qsTr("单峰驼数据库管理工具")
         font.family: "Microsoft YaHei"
         font.pixelSize: 15
         verticalAlignment: Text.AlignVCenter
@@ -73,7 +73,7 @@ ApplicationWindow {
 
     Column{
         anchors.margins: 1
-        height: parent.height - defaultMargin*2
+        height: parent.height - defaultMargin*4
         width: parent.width - 2
         anchors.centerIn: parent
 
@@ -120,7 +120,7 @@ ApplicationWindow {
                 myModel.append({ "modelText": qsTr("浏览"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/List.svg", "modelSrcG": "qrc:/images/ListG.svg"})
                 myModel.append({ "modelText": qsTr("查询"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/Search.svg", "modelSrcG": "qrc:/images/SearchG.svg"})
                 myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
-                //bar.currentIndex = 1;
+                bar.currentIndex = 1;
             }
         }
 

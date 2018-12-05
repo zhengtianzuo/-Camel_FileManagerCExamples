@@ -22,7 +22,7 @@ Page{
             color: "transparent"
 
             id: listItem
-            width: listview.width
+            width: listviewback.width
             height: 30
 
             Text {
@@ -66,9 +66,9 @@ Page{
         }
     }
 
-    ListView{
+    Rectangle{
         z:1
-        id: listview
+        id: listviewback
         width: parent.width/3
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
@@ -76,9 +76,19 @@ Page{
         anchors.bottomMargin: defaultMargin
         anchors.left: parent.left
         anchors.leftMargin: defaultMargin
-        model: listData
-        delegate: listDelegate
-        interactive: false
+        color: "transparent"
+        border.color: "#148014"
+        border.width: 1
+
+        ListView{
+            id: listview
+            height: parent.height - 2
+            width: parent.width - 2
+            anchors.centerIn: parent
+            model: listData
+            delegate: listDelegate
+            interactive: false
+        }
     }
 
     DBInfo{
@@ -86,7 +96,7 @@ Page{
         height: parent.height*0.55
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
-        anchors.left: listview.right
+        anchors.left: listviewback.right
         anchors.leftMargin: defaultMargin
         anchors.right: parent.right
         anchors.rightMargin: defaultMargin
@@ -98,7 +108,7 @@ Page{
         anchors.topMargin: defaultMargin
         anchors.bottom: parent.bottom
         anchors.bottomMargin: defaultMargin
-        anchors.left: listview.right
+        anchors.left: listviewback.right
         anchors.leftMargin: defaultMargin
         anchors.right: parent.right
         anchors.rightMargin: defaultMargin
