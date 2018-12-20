@@ -84,6 +84,7 @@ ApplicationWindow{
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("确定")
             onSClicked: {
+                cDataManager.cls_funManagerData_Combine(comboBox.model.index, name.text, value.text);
                 frmWindow.hide();
             }
         }

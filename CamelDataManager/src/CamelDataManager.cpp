@@ -112,3 +112,12 @@ int CamelDataManager::cls_funManagerDB_CheckSpace()
 {
     return(0);
 }
+
+int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName, QString strValue)
+{
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    string sName = strName.toStdString();
+    Cls_stuDataType sDataType(nDataType, -1, sName.c_str());
+    //int intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, )
+    return(0);
+}
