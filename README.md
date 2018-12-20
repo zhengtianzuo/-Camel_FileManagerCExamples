@@ -23,7 +23,7 @@ Camel_FileManagerC相关的技术分享
 
 ##### Camel_FileManagerC: 基于分布式文件存储的NoSql数据库
 
-![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/Camel_FileManagerCPage.png?raw=true)
+![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/Camel_FileManagerCPage.jpg?raw=true)
 
 ***
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelFileManagerCDll/dromedary.png?raw=true)   中文名: 单峰驼
