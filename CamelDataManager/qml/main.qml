@@ -73,7 +73,7 @@ ApplicationWindow {
 
     Column{
         anchors.margins: 1
-        height: parent.height - defaultMargin*4
+        height: parent.height - defaultMargin*3
         width: parent.width - 2
         anchors.centerIn: parent
 
@@ -85,8 +85,6 @@ ApplicationWindow {
             anchors.rightMargin: defaultMargin
             BaseButton{
                 id: btnMin
-                anchors.top: parent.top
-                anchors.topMargin: defaultMargin
                 height: 24
                 width: 24
                 imgEntered: "qrc:/images/min(3).png"
@@ -98,8 +96,6 @@ ApplicationWindow {
             }
             BaseButton{
                 id: btnClose
-                anchors.top: parent.top
-                anchors.topMargin: defaultMargin
                 height: 24
                 width: 24
                 imgEntered: "qrc:/images/close(3).png"
