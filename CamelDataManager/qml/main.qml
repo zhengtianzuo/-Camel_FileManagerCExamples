@@ -11,6 +11,7 @@ import QtQuick.Controls 2.0
 ApplicationWindow {
 
     property int defaultMargin: 6
+    property bool dbOpened: false
 
     id: frmWindow
     visible: true
@@ -111,17 +112,11 @@ ApplicationWindow {
             id: bar
             height: 48
             width: 64*myModel.count
-            Component.onCompleted: {
-                myModel.append({ "modelText": qsTr("数据库"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
-                myModel.append({ "modelText": qsTr("浏览"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/List.svg", "modelSrcG": "qrc:/images/ListG.svg"})
-                myModel.append({ "modelText": qsTr("查询"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/Search.svg", "modelSrcG": "qrc:/images/SearchG.svg"})
-                myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
-                //bar.currentIndex = 1;
-            }
+            Component.onCompleted: showTabs(dbOpened)
         }
 
         SwipeView {
-            id: view
+            visible: dbOpened
             height: frmWindow.height - bar.height - rowBtn.height - defaultMargin*2
             width: parent.width
             currentIndex: bar.currentIndex
@@ -145,6 +140,33 @@ ApplicationWindow {
             DBAbout{
 
             }
+        }
+
+        SwipeView {
+            visible: !dbOpened
+            height: frmWindow.height - bar.height - rowBtn.height - defaultMargin*2
+            width: parent.width
+            currentIndex: bar.currentIndex
+            interactive: false
+            onCurrentIndexChanged: {
+                bar.currentIndex = currentIndex;
+            }
+
+            DBBrowser{
+
+            }
+
+            DBAbout{
+
+            }
+        }
+    }
+
+    Connections{
+        target: cDataManager
+        onSOpenDataBase: {
+            dbOpened = true;
+            bar.showTabs(dbOpened);
         }
     }
 }

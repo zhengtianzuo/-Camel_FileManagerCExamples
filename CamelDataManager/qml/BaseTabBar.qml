@@ -13,6 +13,19 @@ TabBar {
     property alias myModel: myModel
     property int lastIndex: 0
 
+    function showTabs(opened){
+        myModel.clear();
+        if (opened === true){
+            myModel.append({ "modelText": qsTr("数据库"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
+            myModel.append({ "modelText": qsTr("浏览"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/List.svg", "modelSrcG": "qrc:/images/ListG.svg"})
+            myModel.append({ "modelText": qsTr("查询"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/Search.svg", "modelSrcG": "qrc:/images/SearchG.svg"})
+            myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
+        }else{
+            myModel.append({ "modelText": qsTr("数据库"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/DB.svg", "modelSrcG": "qrc:/images/DBG.svg"})
+            myModel.append({ "modelText": qsTr("关于"), "modelColor": "#148014", "modelColorG": "#4040ff", "modelSrc": "qrc:/images/About.svg", "modelSrcG": "qrc:/images/AboutG.svg"})
+        }
+    }
+
     id: bar
     currentIndex: 0
     background: Rectangle{

@@ -44,6 +44,36 @@ DataListViewModel *CamelDataManager::getListData()
     return (m_listData);
 }
 
+void CamelDataManager::Sub_funManagerBytes(
+        int intFunction, void *pContext, char *&pUserData,
+        int &intUserSize, void *pReturnData, int intReturnSize)
+{
+    Q_UNUSED(pContext);
+    Q_UNUSED(intUserSize);
+    switch (intFunction)
+    {
+    case clsFileManager_intDataType_String:
+    case clsFileManager_intDataType_File:
+    {
+        pUserData = new char[intReturnSize];
+        memcpy(pUserData, pReturnData, intReturnSize);
+    }
+        break;
+    default:
+        break;
+    }
+}
+
+void CamelDataManager::Sub_funManagerData(
+        int intFunction, void *pContext, void *pUserData,
+        int intUserSize, void *pReturnData, int intReturnSize)
+{
+    Q_UNUSED(pContext);
+    Q_UNUSED(intUserSize);
+    Q_UNUSED(intReturnSize);
+    Cls_stuFMCmdMap[intFunction].lpFunc(pUserData, pReturnData);
+}
+
 int CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString strPass, QString strPath)
 {
     string sDBName = strName.toLocal8Bit().toStdString();
@@ -120,6 +150,59 @@ int CamelDataManager::type2RealType(int nType)
     return(nType);
 }
 
+QString CamelDataManager::type2String(int nType)
+{
+    switch (nType) {
+    case 1:
+        return (QString("Short"));
+    case 2:
+        return (QString("Integer"));
+    case 3:
+        return (QString("Float"));
+    case 4:
+        return (QString("Double"));
+    case 5:
+        return (QString("Currency"));
+    case 6:
+        return (QString("Date"));
+    case 7:
+        return (QString("String"));
+    case 8:
+        return (QString("File"));
+    case 10:
+        return (QString("ByteArray"));
+    case 11:
+        return (QString("ShortArray"));
+    case 12:
+        return (QString("IntegerArray"));
+    case 13:
+        return (QString("FloatArray"));
+    case 14:
+        return (QString("DoubleArray"));
+    case 15:
+        return (QString("CurrencyArray"));
+    case 16:
+        return (QString("DateArray"));
+    case 17:
+        return (QString("StringArray"));
+    default:
+        return ("");
+    }
+}
+
+QString CamelDataManager::size2String(int nSize)
+{
+    if (nSize < 1024){
+        return (QString::number(nSize)+QString(" B"));
+    }else if (nSize < 1024*1024){
+        return (QString::number(nSize/1024)+QString(" KB"));
+    }else if (nSize < 1024*1024*1024){
+        return (QString::number(nSize/1024/1024)+QString(" MB"));
+    }else{
+        return (QString::number(nSize/1024/1024/1024)+QString(" GB"));
+    }
+}
+
 int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName, QString strValue)
 {
     nDataType = type2RealType(nDataType);
@@ -129,5 +212,33 @@ int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName,
     string sData = strValue.toStdString();
     Cls_stuUserData sUserData(&sData, 0);
     int intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &sDataType, nullptr, &sUserData, false, -1);
+    return(intError);
+}
+
+int CamelDataManager::cls_funManagerDat_GetAllList()
+{
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    Cls_stuFunction funData(&Sub_funManagerData, this);
+    vector<string> aryDataNameList;
+    Cls_stuUserData userData(&aryDataNameList, -1);
+    int intError = Sub_FMInt->Cls_funManagerData_GetNameList(&dBVerify, clsFileManager_intNameType_Name, &funData, &userData);
+    if (intError != clsFileManager_intErrorCode_Success) return(intError);
+
+    vector<int> aryDataTypeList;
+    Cls_stuUserData userData1(&aryDataTypeList, -1);
+    intError = Sub_FMInt->Cls_funManagerData_GetTypeList(&dBVerify, &funData, &userData1);
+    if (intError != clsFileManager_intErrorCode_Success) return(intError);
+    if (aryDataTypeList.size() != aryDataNameList.size()) return (-1);
+
+    vector<int> aryDataSizeList;
+    Cls_stuUserData userData2(&aryDataSizeList, -1);
+    intError = Sub_FMInt->Cls_funManagerData_GetSizeList(&dBVerify, clsFileManager_intSizeType_DataSize, &funData, &userData2);
+    if (intError != clsFileManager_intErrorCode_Success) return(intError);
+    if (aryDataSizeList.size() != aryDataNameList.size()) return (-1);
+
+    for (unsigned int i = 0; i < aryDataNameList.size(); i++){
+        m_tableData->add(QString(aryDataNameList.at(i).c_str()), type2String(aryDataTypeList.at(i)), size2String(aryDataSizeList.at(i)));
+    }
+
     return(intError);
 }

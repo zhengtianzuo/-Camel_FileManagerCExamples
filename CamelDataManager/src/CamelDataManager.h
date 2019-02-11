@@ -29,12 +29,22 @@ public:
     Q_INVOKABLE int cls_funManagerDB_ChangePassword(QString strNewPass);
     Q_INVOKABLE int cls_funManagerDB_CheckSpace();
     Q_INVOKABLE int cls_funManagerData_Combine(int nDataType, QString strName, QString strValue);
+    Q_INVOKABLE int cls_funManagerDat_GetAllList();
 
 signals:
     void sOpenDataBase(QString strName, QString strPath);
 
 private:
+    static void Sub_funManagerBytes(
+        int intFunction, void *pContext, char *&pUserData, int &intUserSize,
+        void *pReturnData, int intReturnSize);
+    static void Sub_funManagerData(
+        int intFunction, void *pContext, void *pUserData, int intUserSize,
+        void *pReturnData, int intReturnSize);
+
     int type2RealType(int nType);
+    QString type2String(int nType);
+    QString size2String(int nSize);
 
     DataTableViewModel* m_tableData;
     DataListViewModel* m_listData;

@@ -46,7 +46,6 @@ QHash<int, QByteArray> DataListViewModel::roleNames() const
 void DataListViewModel::add(QString strName, QString strPath)
 {
     beginInsertRows(QModelIndex(), m_aryData.size(), m_aryData.size());
-
     foreach (stuListData listData, m_aryData) {
         if (listData.strPath == strPath) return;
     }
