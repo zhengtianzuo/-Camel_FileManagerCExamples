@@ -63,7 +63,6 @@ Rectangle{
             selectByMouse: true
             cursorVisible: false
             cursorPosition: 0
-            textFormat: Text.RichText
             selectByKeyboard: true
             wrapMode: TextEdit.Wrap
         }

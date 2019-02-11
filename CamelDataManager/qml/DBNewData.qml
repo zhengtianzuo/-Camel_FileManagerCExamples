@@ -20,6 +20,10 @@ ApplicationWindow{
         frmWindow.showNormal();
     }
 
+    BaseMessageDialog{
+        id: message
+    }
+
     Column{
         height: parent.height - defaultMargin*2
         width: parent.width - defaultMargin*2
@@ -50,6 +54,7 @@ ApplicationWindow{
                     qsTr("ShortArray"), qsTr("IntegerArray"), qsTr("FloatArray"),
                     qsTr("DoubleArray"), qsTr("CurrencyArray"), qsTr("DateArray"),
                     qsTr("StringArray")]
+                currentIndex: 6
             }
         }
 
@@ -84,7 +89,18 @@ ApplicationWindow{
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("确定")
             onSClicked: {
-                cDataManager.cls_funManagerData_Combine(comboBox.model.index, name.text, value.text);
+                if (name.inputText.length === 0){
+                    message.showMsg(qsTr("请输入数据名称"));
+                    return;
+                }
+                if (value.inputText.length === 0){
+                    message.showMsg(qsTr("请输入数据内容"));
+                    return;
+                }
+                var intError = cDataManager.cls_funManagerData_Combine(comboBox.currentIndex, name.inputText, value.inputText);
+                if (intError !== 1){
+                    message.showMsg(qsTr("添加数据错误, 错误码: ") + intError);
+                }
                 frmWindow.hide();
             }
         }

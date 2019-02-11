@@ -113,11 +113,21 @@ int CamelDataManager::cls_funManagerDB_CheckSpace()
     return(0);
 }
 
+int CamelDataManager::type2RealType(int nType)
+{
+    nType++;
+    if (nType > 8) nType++;
+    return(nType);
+}
+
 int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName, QString strValue)
 {
+    nDataType = type2RealType(nDataType);
     Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     string sName = strName.toStdString();
     Cls_stuDataType sDataType(nDataType, -1, sName.c_str());
-    //int intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, )
-    return(0);
+    string sData = strValue.toStdString();
+    Cls_stuUserData sUserData(&sData, 0);
+    int intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &sDataType, nullptr, &sUserData, false, -1);
+    return(intError);
 }

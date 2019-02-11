@@ -34,6 +34,8 @@ signals:
     void sOpenDataBase(QString strName, QString strPath);
 
 private:
+    int type2RealType(int nType);
+
     DataTableViewModel* m_tableData;
     DataListViewModel* m_listData;
     Camel_FileManagerCInterface *Sub_FMInterface;

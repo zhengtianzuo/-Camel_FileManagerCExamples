@@ -11,13 +11,15 @@ import Qt.labs.platform 1.0
 
 Item{
 
-	function showMsg(text){
+    function showMsg(text){
 		msg.text = text;
 		msg.open();
 	}
 
 	MessageDialog{
-		id: msg
-		buttons: MessageDialog.Ok
+        id: msg
+        title: " "
+        flags: Qt.Window | Qt.Tool
+        buttons: MessageDialog.Ok
 	}
 }
