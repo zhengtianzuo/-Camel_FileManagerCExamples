@@ -32,7 +32,7 @@ public:
     Q_INVOKABLE int cls_funManagerDat_GetAllList();
 
 signals:
-    void sOpenDataBase(QString strName, QString strPath);
+    void sOpenDataBase(QString strName, QString strPath, QString strFileNum, QString strFileSize);
 
 private:
     static void Sub_funManagerBytes(

@@ -51,7 +51,7 @@ ApplicationWindow {
     Text{
         anchors.left: parent.left
         anchors.leftMargin: 48
-        height: 48
+        height: 40
         text: qsTr("单峰驼数据库管理工具")
         font.family: "Microsoft YaHei"
         font.pixelSize: 15

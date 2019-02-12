@@ -103,4 +103,14 @@ Rectangle {
             }
         }
     }
+
+    Connections{
+        target: cDataManager
+        onSOpenDataBase: {
+            dbName.inputText = strName;
+            ldbPath.inputText = strPath;
+            dbNum.inputText = strFileNum;
+            dbSize.inputText = strFileSize;
+        }
+    }
 }

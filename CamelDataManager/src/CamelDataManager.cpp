@@ -106,18 +106,27 @@ int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString str
     int intError = Sub_FMInt->Cls_funManagerDB_OpenDataBase(&dBVerify);
     if (intError == clsFileManager_intErrorCode_Success)
     {
+        int nFileSize = 0;
         if (strName.length() == 0)
         {
             QFileInfo fileInfo;
-            fileInfo.setFile(strPath);
+            fileInfo.setFile(sDBFileName.c_str());
             strName = fileInfo.fileName();
             strName = strName.replace(DBSuffix, "");
+            nFileSize = static_cast<int>(fileInfo.size());
         }
         m_listData->add(strName, strPath);
         m_strCurDBName = sDBName;
         m_strCurDBPass = sDBPass;
         m_strCurDBPath = sDBFileName;
-        emit sOpenDataBase(strName, strPath);
+
+        int nFileNum = 0;
+        Sub_FMInt->Cls_funManagerDB_GetTotalNumber(&dBVerify, nFileNum);
+
+        char chrDBName[Cls_intFNameSize + 1];
+        Sub_FMInt->Cls_funManagerDB_GetName(&dBVerify, chrDBName);
+
+        emit sOpenDataBase(QString(chrDBName).trimmed(), sDBFileName.c_str(), QString::number(nFileNum), size2String(nFileSize));
     }
     return(intError);
 }

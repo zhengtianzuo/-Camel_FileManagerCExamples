@@ -10,9 +10,10 @@ import QtQuick.Controls 2.0
 
 ApplicationWindow{
     id: frmWindow
-    height: 400
+    height: 460
     width: 600
     modality: Qt.ApplicationModal
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     property int defaultMargin: 6
 
@@ -24,10 +25,55 @@ ApplicationWindow{
         id: message
     }
 
+    Rectangle{
+        anchors.fill: parent
+        border.color: "#148014"
+        border.width: 1
+        color: "transparent"
+    }
+
+    Image{
+        height: 24
+        width: 24
+        anchors.left: parent.left
+        anchors.leftMargin: defaultMargin
+        anchors.top: parent.top
+        anchors.topMargin: defaultMargin
+        source: "qrc:/dromedary.ico"
+    }
+
+    Text{
+        anchors.left: parent.left
+        anchors.leftMargin: 40
+        height: 36
+        text: qsTr("添加数据")
+        font.family: "Microsoft YaHei"
+        font.pixelSize: 15
+        verticalAlignment: Text.AlignVCenter
+        color: "#148014"
+    }
+
+    BaseButton{
+        id: btnClose
+        height: 24
+        width: 24
+        anchors.top: parent.top
+        anchors.topMargin: defaultMargin
+        anchors.right: parent.right
+        anchors.rightMargin: defaultMargin
+        imgEntered: "qrc:/images/close(3).png"
+        imgExited: "qrc:/images/close.png"
+        imgPressed: "qrc:/images/close(1).png"
+        onSClicked: {
+            close();
+        }
+    }
+
     Column{
-        height: parent.height - defaultMargin*2
+        anchors.top: parent.top
+        anchors.topMargin: 40
         width: parent.width - defaultMargin*2
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
         spacing: defaultMargin
 
         Row{
