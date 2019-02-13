@@ -35,7 +35,7 @@ Rectangle{
         anchors.leftMargin: defaultMargin
         verticalAlignment: Text.AlignVCenter
         font.family: "Microsoft YaHei"
-        font.pixelSize: 15
+        font.pixelSize: 12
     }
 
     Rectangle{
@@ -56,7 +56,7 @@ Rectangle{
             height: parent.height
             text: qsTr("")
             font.family: "Microsoft YaHei"
-            font.pixelSize: 15
+            font.pixelSize: 12
             selectByMouse: true
             cursorVisible: false
             readOnly: true

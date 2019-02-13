@@ -19,7 +19,7 @@ Button{
     id: btn
     text: txtText
     font.family: "Microsoft YaHei"
-    font.pixelSize: 15
+    font.pixelSize: 12
     background: Image{
         id: img
         anchors.fill: parent

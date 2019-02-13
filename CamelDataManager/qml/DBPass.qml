@@ -37,7 +37,7 @@ ApplicationWindow{
         anchors.leftMargin: defaultMargin
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
-        source: "qrc:/dromedary.ico"
+        source: "qrc:/images/dromedary.ico"
     }
 
     Text{
@@ -46,7 +46,7 @@ ApplicationWindow{
         height: 40
         text: qsTr("请输入密码")
         font.family: "Microsoft YaHei"
-        font.pixelSize: 15
+        font.pixelSize: 12
         verticalAlignment: Text.AlignVCenter
         color: "#148014"
     }

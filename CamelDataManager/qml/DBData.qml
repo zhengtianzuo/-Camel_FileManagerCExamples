@@ -13,6 +13,10 @@ Rectangle{
 
     id: frmWindow
 
+    BaseMessageDialog{
+        id: message
+    }
+
     Row{
         id: rowData
         height: parent.height - control.height - defaultMargin*3
@@ -26,6 +30,22 @@ Rectangle{
             id: tableView
             height: parent.height
             width: parent.width/2
+            itemDelegate: Text {
+                x: defaultMargin
+                font.family: "Microsoft YaHei"
+                font.pixelSize: 12
+                verticalAlignment: Text.AlignVCenter
+                color: "#000000"
+                text: styleData.value
+            }
+            onClicked: {
+                var strData = cDataManager.cls_funManagerData_GetData(row);
+                if (strData.length === 0){
+                    message.showMsg(qsTr("获取数据错误"));
+                    return;
+                }
+                textEdit.text = strData;
+            }
         }
 
         Column{
@@ -42,7 +62,7 @@ Rectangle{
                 interactive: false
 
                 TextEdit{
-
+                    id: textEdit
                 }
 
                 AnimatedImage{

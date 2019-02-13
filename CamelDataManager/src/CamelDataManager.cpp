@@ -224,7 +224,7 @@ int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName,
     return(intError);
 }
 
-int CamelDataManager::cls_funManagerDat_GetAllList()
+int CamelDataManager::cls_funManagerData_GetAllList()
 {
     Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     Cls_stuFunction funData(&Sub_funManagerData, this);
@@ -250,4 +250,60 @@ int CamelDataManager::cls_funManagerDat_GetAllList()
     }
 
     return(intError);
+}
+
+QString CamelDataManager::cls_funManagerData_GetData(int nRow)
+{
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    Cls_stuDataType sDType(-1, nRow+2, nullptr);
+    int nType = 0;
+    int nError = Sub_FMInt->Cls_funManagerData_GetType(&dBVerify, &sDType, nType);
+    if (nError != clsFileManager_intErrorCode_Success) return(QString(""));
+    Cls_stuFunction fun(nullptr, nullptr);
+    Cls_stuFunction funData(&Sub_funManagerData, this);
+    switch (nType) {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+    {
+        string strString = "";
+        int intSize = 0;
+        Cls_stuDataType sDataType(nType, nRow+2, nullptr);
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(strString), intSize);
+        int intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &funData, &getUserData);
+        if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
+        return (QString(strString.c_str()));
+    }
+    case 8:
+        break;
+    case 10:
+        break;
+    case 11:
+        break;
+    case 12:
+        break;
+    case 13:
+        break;
+    case 14:
+        break;
+    case 15:
+        break;
+    case 16:
+        break;
+    case 17:
+        break;
+    default:
+        return ("");
+    }
+    return ("");
 }

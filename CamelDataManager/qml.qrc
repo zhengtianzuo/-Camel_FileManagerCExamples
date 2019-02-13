@@ -61,8 +61,8 @@
         <file>images/SilkStyle_Back.png</file>
         <file>qml/BaseMessageDialog.qml</file>
         <file>qml/DBPass.qml</file>
-        <file>dromedary.ico</file>
         <file>qml/DBNewData.qml</file>
         <file>qml/BaseTextEdit.qml</file>
+        <file>images/dromedary.ico</file>
     </qresource>
 </RCC>

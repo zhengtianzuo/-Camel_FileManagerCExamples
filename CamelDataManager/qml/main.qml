@@ -20,7 +20,7 @@ ApplicationWindow {
     title: qsTr("")
     flags: Qt.Window | Qt.FramelessWindowHint
     font.family: "Microsoft YaHei"
-    font.pixelSize: 15
+    font.pixelSize: 12
 
     Rectangle{
         z:1
@@ -39,22 +39,22 @@ ApplicationWindow {
     }
 
     Image{
-        height: 32
-        width: 32
+        height: 24
+        width: 24
         anchors.left: parent.left
         anchors.leftMargin: defaultMargin
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
-        source: "qrc:/dromedary.ico"
+        source: "qrc:/images/dromedary.ico"
     }
 
     Text{
         anchors.left: parent.left
         anchors.leftMargin: 48
-        height: 40
+        height: 36
         text: qsTr("单峰驼数据库管理工具")
         font.family: "Microsoft YaHei"
-        font.pixelSize: 15
+        font.pixelSize: 14
         verticalAlignment: Text.AlignVCenter
         color: "#148014"
     }

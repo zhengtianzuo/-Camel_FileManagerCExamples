@@ -31,7 +31,7 @@ Rectangle{
             if (intError !== 1){
                 message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
             }else{
-                cDataManager.cls_funManagerDat_GetAllList();
+                cDataManager.cls_funManagerData_GetAllList();
             }
         }
     }

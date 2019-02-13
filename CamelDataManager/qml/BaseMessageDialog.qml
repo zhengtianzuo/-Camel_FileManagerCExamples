@@ -37,7 +37,7 @@ ApplicationWindow{
         anchors.leftMargin: defaultMargin
         anchors.top: parent.top
         anchors.topMargin: defaultMargin
-        source: "qrc:/dromedary.ico"
+        source: "qrc:/images/dromedary.ico"
     }
 
     Text{
@@ -46,7 +46,7 @@ ApplicationWindow{
         height: 36
         text: qsTr("提示")
         font.family: "Microsoft YaHei"
-        font.pixelSize: 15
+        font.pixelSize: 12
         verticalAlignment: Text.AlignVCenter
         color: "#148014"
     }
@@ -80,7 +80,7 @@ ApplicationWindow{
             horizontalAlignment: Text.AlignHCenter
             anchors.horizontalCenter: parent.horizontalCenter
             font.family: "Microsoft YaHei"
-            font.pixelSize: 15
+            font.pixelSize: 12
         }
 
         BaseButton{
