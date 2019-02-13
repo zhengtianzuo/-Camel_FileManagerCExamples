@@ -48,44 +48,55 @@ Rectangle{
             }
         }
 
-        Column{
-            id: colDetail
+        Rectangle{
             height: tableView.height
-            width: parent.width/2
-            spacing: defaultMargin
+            width: parent.width/2 - defaultMargin
+            border.color: "#148014"
+            border.width: 1
 
-            SwipeView {
-                id: view
-                height: parent.width
-                width: parent.width
-                currentIndex: 0
-                interactive: false
+            Column{
+                id: colDetail
+                anchors.fill: parent
+                spacing: defaultMargin
 
-                TextEdit{
-                    id: textEdit
+                SwipeView {
+                    id: view
+                    height: parent.width
+                    width: parent.width
+                    currentIndex: 0
+                    interactive: false
+
+                    TextEdit{
+                        id: textEdit
+                        font.family: "Microsoft YaHei"
+                        font.pixelSize: 14
+                        selectByMouse: true
+                        selectByKeyboard: true
+                        wrapMode: TextEdit.Wrap
+                    }
+
+                    AnimatedImage{
+
+                    }
+
+                    Rectangle{
+
+                    }
+
+                    Rectangle{
+
+                    }
                 }
 
-                AnimatedImage{
+                BaseButton{
+                    id: btnModify
+                    height: 24
+                    width: 120
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: qsTr("应用修改")
+                    onSClicked: {
 
-                }
-
-                Rectangle{
-
-                }
-
-                Rectangle{
-
-                }
-            }
-
-            BaseButton{
-                id: btnModify
-                height: 24
-                width: 120
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("应用修改")
-                onSClicked: {
-
+                    }
                 }
             }
         }
