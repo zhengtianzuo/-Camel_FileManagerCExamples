@@ -7,6 +7,7 @@
 */
 #include "CamelDataManager.h"
 #include <QFileInfo>
+#include <QDateTime>
 
 CamelDataManager::CamelDataManager()
 {
@@ -218,9 +219,99 @@ int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName,
     Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     string sName = strName.toStdString();
     Cls_stuDataType sDataType(nDataType, -1, sName.c_str());
-    string sData = strValue.toStdString();
-    Cls_stuUserData sUserData(&sData, 0);
-    int intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &sDataType, nullptr, &sUserData, false, -1);
+    int intError = 0;
+    Cls_lpstuUserData sUserData = nullptr;
+    switch (nDataType) {
+    case 1:
+    {
+        short sData = strValue.toShort();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 2:
+    {
+        int sData = strValue.toInt();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 3:
+    {
+        float sData = strValue.toFloat();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 4:
+    {
+        double sData = strValue.toDouble();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 5:
+    {
+        double sData = strValue.toDouble();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 6:
+    {
+        double sData = strValue.toDouble();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 7:
+    {
+        string sData = strValue.toStdString();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 8:
+    {
+    }
+        break;
+    case 10:
+    {
+    }
+        break;
+    case 11:
+    {
+    }
+        break;
+    case 12:
+    {
+    }
+        break;
+    case 13:
+    {
+    }
+        break;
+    case 14:
+    {
+    }
+        break;
+    case 15:
+    {
+    }
+        break;
+    case 16:
+    {
+    }
+        break;
+    case 17:
+    {
+    }
+        break;
+    default:
+        return (-1);
+    }
+    intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &sDataType, nullptr, sUserData, false, -1);
+    if (intError == clsFileManager_intErrorCode_Success){
+        int intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &sDataType, intSize);
+        if (intError == clsFileManager_intErrorCode_Success){
+            m_tableData->add(strName, type2String(nDataType), size2String(intSize));
+        }
+    }
+    if (sUserData != nullptr){delete sUserData;}
     return(intError);
 }
 
@@ -261,24 +352,65 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     if (nError != clsFileManager_intErrorCode_Success) return(QString(""));
     Cls_stuFunction fun(nullptr, nullptr);
     Cls_stuFunction funData(&Sub_funManagerData, this);
+    Cls_stuDataType sDataType(nType, nRow+2, nullptr);
+    int intSize = 0;
+    int intError = 0;
     switch (nType) {
     case 1:
-        break;
+    {
+        short srtShort = 0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(srtShort), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
+        return (QString::number(srtShort));
+    }
     case 2:
-        break;
+    {
+        int intInt = 0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(intInt), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
+        return (QString::number(intInt));
+    }
     case 3:
+    {
+        float fltFloat = 0.0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(fltFloat), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
+        return (QString::number(fltFloat));
+    }
         break;
     case 4:
+    {
+        double dblDouble = 0.0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(dblDouble), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
+        return (QString::number(dblDouble));
+    }
         break;
     case 5:
+    {
+        double cryCurrency = 0.0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(cryCurrency), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
+        return (QString::number(cryCurrency));
+    }
         break;
     case 6:
+    {
+        double dateTime = 0.0;
+        Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(dateTime), intSize);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        QString strTime = QDateTime::fromMSecsSinceEpoch(dateTime).toString("yyyy-MM-dd hh:mm:ss");
+        return (strTime);
+    }
         break;
     case 7:
     {
         string strString = "";
-        int intSize = 0;
-        Cls_stuDataType sDataType(nType, nRow+2, nullptr);
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(strString), intSize);
         int intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &funData, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));

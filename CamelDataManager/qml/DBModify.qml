@@ -51,6 +51,7 @@ Rectangle{
                     var intError = cDataManager.cls_funManagerDB_SetName(dbName.inputText);
                     if (intError !== 1){
                         message.showMsg(qsTr("修改数据库名称错误, 错误码: ") + intError);
+                        return;
                     }
                 }
             }
@@ -100,7 +101,9 @@ Rectangle{
                     var intError = cDataManager.cls_funManagerDB_ChangePassword(dbrePass.inputText);
                     if (intError !== 1){
                         message.showMsg(qsTr("修改数据库密码错误, 错误码: ") + intError);
+                        return;
                     }
+                    message.showMsg(qsTr("已成功修改数据库密码"));
                 }
             }
         }

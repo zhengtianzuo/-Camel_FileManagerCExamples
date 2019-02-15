@@ -146,6 +146,7 @@ ApplicationWindow{
                 var intError = cDataManager.cls_funManagerData_Combine(comboBox.currentIndex, name.inputText, value.inputText);
                 if (intError !== 1){
                     message.showMsg(qsTr("添加数据错误, 错误码: ") + intError);
+                    return;
                 }
                 frmWindow.hide();
             }

@@ -30,9 +30,9 @@ Rectangle{
             var intError = cDataManager.cls_funManagerDB_OpenDataBase("", inputText, ldbPath.inputText);
             if (intError !== 1){
                 message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
-            }else{
-                cDataManager.cls_funManagerData_GetAllList();
+                return;
             }
+            cDataManager.cls_funManagerData_GetAllList();
         }
     }
 

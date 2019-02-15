@@ -36,9 +36,9 @@ Rectangle {
             BaseTextField{
                 id: dbNum
                 anchors.left: dbName.right
-                showText: qsTr("文件数:")
+                showText: qsTr("数据个数:")
                 inputText: qsTr("")
-                inputWidth: 60
+                inputWidth: 80
             }
 
             BaseTextField{
