@@ -439,3 +439,11 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     }
     return ("");
 }
+
+int CamelDataManager::cls_funManagerData_Delete(int nRow)
+{
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    Cls_stuDataType sDType(-1, nRow+2, nullptr);
+    int intError = Sub_FMInt->Cls_funManagerData_Delete(&dBVerify, &sDType);
+    return(intError);
+}

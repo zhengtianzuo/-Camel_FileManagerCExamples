@@ -31,6 +31,7 @@ public:
     Q_INVOKABLE int cls_funManagerData_Combine(int nDataType, QString strName, QString strValue);
     Q_INVOKABLE int cls_funManagerData_GetAllList();
     Q_INVOKABLE QString cls_funManagerData_GetData(int nRow);
+    Q_INVOKABLE int cls_funManagerData_Delete(int nRow);
 
 signals:
     void sOpenDataBase(QString strName, QString strPath, QString strFileNum, QString strFileSize);

@@ -1,6 +1,6 @@
 ﻿/*!
- *@file DBNewData.qml
- *@brief 新增数据
+ *@file DBDataDel.qml
+ *@brief 删除数据
  *@version 1.0
  *@section LICENSE Copyright (C) 2003-2103 CamelSoft Corporation
  *@author zhengtianzuo
@@ -46,7 +46,7 @@ ApplicationWindow{
         anchors.left: parent.left
         anchors.leftMargin: 40
         height: 36
-        text: qsTr("添加数据")
+        text: qsTr("删除数据")
         font.family: "Microsoft YaHei"
         font.pixelSize: 12
         verticalAlignment: Text.AlignVCenter
@@ -82,7 +82,7 @@ ApplicationWindow{
 
             Text{
                 id: lname
-                text: qsTr("选择数据类型: ")
+                text: qsTr("数据类型: ")
                 height: 30+defaultMargin*2
                 width: contentWidth
                 verticalAlignment: Text.AlignVCenter
@@ -101,6 +101,7 @@ ApplicationWindow{
                     qsTr("DoubleArray"), qsTr("CurrencyArray"), qsTr("DateArray"),
                     qsTr("StringArray")]
                 currentIndex: 6
+				enabled: false
             }
         }
 
@@ -111,7 +112,7 @@ ApplicationWindow{
             showWidth: 40
             inputText: qsTr("")
             inputWidth: parent.width-showWidth-defaultMargin*3
-            readOnly: false
+            readOnly: true
         }
 
         BaseTextEdit{
@@ -125,7 +126,7 @@ ApplicationWindow{
             showWidth: 40
             inputText: qsTr("")
             inputWidth: parent.width-showWidth-defaultMargin*3
-            readOnly: false
+            readOnly: true
         }
 
         BaseButton{
@@ -133,19 +134,11 @@ ApplicationWindow{
             height: 30
             width: 120
             anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("确定")
+            text: qsTr("确定删除")
             onSClicked: {
-                if (name.inputText.length === 0){
-                    message.showMsg(qsTr("请输入数据名称"));
-                    return;
-                }
-                if (value.inputText.length === 0){
-                    message.showMsg(qsTr("请输入数据内容"));
-                    return;
-                }
-                var intError = cDataManager.cls_funManagerData_Combine(comboBox.currentIndex, name.inputText, value.inputText);
+                var intError = cDataManager.cls_funManagerData_Delete(comboBox.currentIndex);
                 if (intError !== 1){
-                    message.showMsg(qsTr("添加数据错误, 错误码: ") + intError);
+                    message.showMsg(qsTr("删除数据错误, 错误码: ") + intError);
                     return;
                 }
                 frmWindow.hide();

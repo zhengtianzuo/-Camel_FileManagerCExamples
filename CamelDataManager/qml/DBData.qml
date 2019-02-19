@@ -140,7 +140,7 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("删除")
                 onSClicked: {
-
+                    dBDataDel.showNormal();
                 }
             }
 
@@ -151,13 +151,17 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("添加")
                 onSClicked: {
-                    dBNewData.showNormal();
+                    dBDataNew.showNormal();
                 }
             }
         }
     }
 
-    DBNewData{
-        id: dBNewData
+    DBDataNew{
+        id: dBDataNew
+    }
+
+    DBDataDel{
+        id: dBDataDel
     }
 }
