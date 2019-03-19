@@ -65,6 +65,7 @@ Rectangle{
             cursorPosition: 0
             selectByKeyboard: true
             wrapMode: TextEdit.Wrap
+            verticalAlignment: Text.AlignVCenter
         }
     }
 }

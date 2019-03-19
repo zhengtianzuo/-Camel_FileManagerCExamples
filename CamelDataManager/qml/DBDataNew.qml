@@ -69,6 +69,38 @@ ApplicationWindow{
         }
     }
 
+    Component{
+        id: listDelegate
+
+        Row{
+            height: 40
+            width: parent.width
+
+            BaseTextField{
+                id: name
+                focus: true
+                showText: qsTr("名称:")
+                showWidth: 40
+                inputText: qsTr("")
+                inputWidth: parent.width/3-showWidth-defaultMargin*3
+                readOnly: false
+            }
+
+            BaseTextEdit{
+                id: value
+                focus: true
+                height: name.height
+                width: name.width*2
+                tName.height: 30
+                showText: qsTr("值:")
+                showWidth: 40
+                inputText: qsTr("")
+                inputWidth: parent.width/3*2-showWidth-defaultMargin*3
+                readOnly: false
+            }
+        }
+    }
+
     Column{
         anchors.top: parent.top
         anchors.topMargin: 40
@@ -77,8 +109,10 @@ ApplicationWindow{
         spacing: defaultMargin
 
         Row{
+            id: selectLine
             height: 30+defaultMargin*2
             width: parent.width
+            spacing: defaultMargin
 
             Text{
                 id: lname
@@ -133,53 +167,56 @@ ApplicationWindow{
 
                 }
             }
+
+            BaseButton{
+                id: btnAddline
+                height: 30
+                width: 120
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("增加行")
+                onClicked: {
+
+                }
+            }
+
+            BaseButton{
+                id: btnOK
+                height: 30
+                width: 120
+                anchors.verticalCenter: parent.verticalCenter
+                text: qsTr("添加完成")
+                onSClicked: {
+                    if (name.inputText.length === 0){
+                        message.showMsg(qsTr("请输入数据名称"));
+                        return;
+                    }
+                    if (value.inputText.length === 0){
+                        message.showMsg(qsTr("请输入数据内容"));
+                        return;
+                    }
+                    var intError = cDataManager.cls_funManagerData_Combine(comboBox.currentIndex, name.inputText, value.inputText);
+                    if (intError !== 1){
+                        message.showMsg(qsTr("添加数据错误, 错误码: ") + intError);
+                        return;
+                    }
+                    frmWindow.hide();
+                }
+            }
         }
 
-        BaseTextField{
-            id: name
-            focus: true
-            showText: qsTr("名称:")
-            showWidth: 40
-            inputText: qsTr("")
-            inputWidth: parent.width-showWidth-defaultMargin*3
-            readOnly: false
-        }
+        Rectangle{
+            id: listviewback
+            height: parent.height - selectLine.height - defaultMargin*2
+            width: parent.width
+            color: "red"
 
-        BaseTextEdit{
-            id: value
-            focus: true
-            height: 260
-            width: name.width
-            anchors.horizontalCenter: parent.horizontalCenter
-            tName.height: 230
-            showText: qsTr("值:")
-            showWidth: 40
-            inputText: qsTr("")
-            inputWidth: parent.width-showWidth-defaultMargin*3
-            readOnly: false
-        }
-
-        BaseButton{
-            id: btnOK
-            height: 30
-            width: 120
-            anchors.horizontalCenter: parent.horizontalCenter
-            text: qsTr("添加完成")
-            onSClicked: {
-                if (name.inputText.length === 0){
-                    message.showMsg(qsTr("请输入数据名称"));
-                    return;
-                }
-                if (value.inputText.length === 0){
-                    message.showMsg(qsTr("请输入数据内容"));
-                    return;
-                }
-                var intError = cDataManager.cls_funManagerData_Combine(comboBox.currentIndex, name.inputText, value.inputText);
-                if (intError !== 1){
-                    message.showMsg(qsTr("添加数据错误, 错误码: ") + intError);
-                    return;
-                }
-                frmWindow.hide();
+            ListView{
+                id: listview
+                height: contentHeight
+                width: parent.width
+                model: 1
+                delegate: listDelegate
+                interactive: false
             }
         }
     }
