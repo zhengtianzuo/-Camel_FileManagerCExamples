@@ -101,6 +101,37 @@ ApplicationWindow{
                     qsTr("DoubleArray"), qsTr("CurrencyArray"), qsTr("DateArray"),
                     qsTr("StringArray")]
                 currentIndex: 6
+                onCurrentIndexChanged: {
+                    switch (currentIndex)
+                    {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        break;
+                    case 7:
+                        break;
+                    case 8:
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                        break;
+                    case 14:
+                        break;
+                    case 15:
+                        break;
+                    default:
+                        break;
+                    }
+
+                }
             }
         }
 
