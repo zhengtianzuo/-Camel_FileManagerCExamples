@@ -18,6 +18,8 @@ Rectangle{
     property alias readOnly: tName.readOnly
     property alias tName:tName
 
+    signal sEditingFinished(string text);
+
     height: 30+defaultMargin*2
     width: lname.width+defaultMargin+rname.width+defaultMargin*2
     border.color: "#148014"
@@ -66,6 +68,7 @@ Rectangle{
             selectByKeyboard: true
             wrapMode: TextEdit.Wrap
             verticalAlignment: Text.AlignVCenter
+            onTextChanged: {emit: sEditingFinished(tName.text)}
         }
     }
 }

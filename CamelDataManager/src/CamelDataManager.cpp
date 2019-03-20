@@ -221,6 +221,7 @@ int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName,
     Cls_stuDataType sDataType(nDataType, -1, sName.c_str());
     int intError = 0;
     Cls_lpstuUserData sUserData = nullptr;
+    string strData = "";
     switch (nDataType) {
     case 1:
     {
@@ -260,8 +261,8 @@ int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName,
         break;
     case 7:
     {
-        string sData = strValue.toStdString();
-        sUserData = new Cls_stuUserData(&sData, 0);
+        strData = strValue.toLocal8Bit().data();
+        sUserData = new Cls_stuUserData(&strData, 0);
     }
         break;
     case 8:
@@ -414,7 +415,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(strString), intSize);
         int intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &funData, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
-        return (QString(strString.c_str()));
+        return (QString::fromLocal8Bit(strString.c_str()));
     }
     case 8:
         break;

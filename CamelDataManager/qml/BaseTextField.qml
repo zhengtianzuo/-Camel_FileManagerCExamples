@@ -19,6 +19,8 @@ Rectangle{
     property alias echoMode: tName.echoMode
     property alias tName:tName
 
+    signal sEditingFinished(string text);
+
     height: 30+defaultMargin*2
     width: lname.width+defaultMargin+rname.width+defaultMargin*2
     border.color: "#148014"
@@ -62,6 +64,7 @@ Rectangle{
             readOnly: true
             verticalAlignment: Text.AlignVCenter
             cursorPosition: 0
+            onTextChanged: {emit: sEditingFinished(tName.text)}
         }
     }
 }
