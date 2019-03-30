@@ -81,7 +81,7 @@ int CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString s
     string sDBFileName = sAppPath + sDBName + DBSuffix.toStdString();
 
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
-    int intError = Sub_FMInt->Cls_funManagerDB_CreateDataBase(m_dBVerify, sDBName.c_str(), true);
+    int intError = Sub_FMInt->Cls_funManagerDB_CreateDataBase(&dBVerify, sDBName.c_str(), true);
     if (intError == clsFileManager_intErrorCode_Success)
     {
         m_listData->add(strName, strPath);
