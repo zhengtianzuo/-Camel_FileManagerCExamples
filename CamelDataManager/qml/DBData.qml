@@ -10,6 +10,9 @@ import QtQuick.Controls 2.0
 
 Rectangle{
     property int defaultMargin: 6
+    property string curName: ""
+    property int curType: 0
+    property string curValue: ""
 
     id: frmWindow
 
@@ -39,12 +42,14 @@ Rectangle{
                 text: styleData.value
             }
             onClicked: {
-                var strData = cDataManager.cls_funManagerData_GetData(row);
-                if (strData.length === 0){
+                curValue = cDataManager.cls_funManagerData_GetData(row);
+                if (curValue.length === 0){
                     message.showMsg(qsTr("获取数据错误"));
                     return;
                 }
-                textEdit.text = strData;
+                curName = cDataManager.cls_funManagerData_GetName(row);
+                curType = cDataManager.cls_funManagerData_GetType(row);
+                textEdit.text = curValue;
             }
         }
 
@@ -95,7 +100,11 @@ Rectangle{
                     anchors.horizontalCenter: parent.horizontalCenter
                     text: qsTr("应用修改")
                     onSClicked: {
-
+                        if (textEdit.text.length === 0){
+                            message.showMsg(qsTr("数据内容无效"));
+                            return;
+                        }
+                        cDataManager.cls_funManagerData_Modify(curType, curName, textEdit.text);
                     }
                 }
             }

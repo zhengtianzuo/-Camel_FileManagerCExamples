@@ -157,8 +157,6 @@ ApplicationWindow{
                     var rowCount = listModel.count;
                     for( var i = 0;i < rowCount;i++ ) {
                         var model = listModel.get(i);
-                        console.log(model.name);
-                        console.log(model.value);
                         if (model.name.length === 0){
                             message.showMsg(qsTr("请输入数据名称"));
                             return;

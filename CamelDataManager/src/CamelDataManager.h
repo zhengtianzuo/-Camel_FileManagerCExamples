@@ -30,8 +30,11 @@ public:
     Q_INVOKABLE int cls_funManagerDB_CheckSpace();
     Q_INVOKABLE int cls_funManagerData_Combine(int nDataType, QString strName, QString strValue);
     Q_INVOKABLE int cls_funManagerData_GetAllList();
+    Q_INVOKABLE QString cls_funManagerData_GetName(int nRow);
+    Q_INVOKABLE int cls_funManagerData_GetType(int nRow);
     Q_INVOKABLE QString cls_funManagerData_GetData(int nRow);
     Q_INVOKABLE int cls_funManagerData_Delete(int nRow);
+    Q_INVOKABLE int cls_funManagerData_Modify(int nDataType, QString strName, QString strValue);
 
 signals:
     void sOpenDataBase(QString strName, QString strPath, QString strFileNum, QString strFileSize);

@@ -74,3 +74,15 @@ void DataTableViewModel::refresh()
     beginResetModel();
     endResetModel();
 }
+
+void DataTableViewModel::update(QString strName, int column, QString strText)
+{
+    beginResetModel();
+    for (int i = 0;i < m_aryData.size();i++) {
+       QVector<QString>& list = m_aryData[i];
+       if (list.at(0) != strName) continue;
+       if (column < 0 || column > list.size()) return;
+       list[column] = strText;
+    }
+    endResetModel();
+}

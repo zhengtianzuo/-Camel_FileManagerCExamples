@@ -344,6 +344,26 @@ int CamelDataManager::cls_funManagerData_GetAllList()
     return(intError);
 }
 
+QString CamelDataManager::cls_funManagerData_GetName(int nRow)
+{
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    Cls_stuDataType sDType(-1, nRow+2, nullptr);
+    char chrDataName[Cls_intFNameSize + 1];
+    int nError = Sub_FMInt->Cls_funManagerData_GetName(&dBVerify, &sDType, clsFileManager_intNameType_Name, chrDataName);
+    if (nError != clsFileManager_intErrorCode_Success) return("");
+    return(QString(chrDataName));
+}
+
+int CamelDataManager::cls_funManagerData_GetType(int nRow)
+{
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    Cls_stuDataType sDType(-1, nRow+2, nullptr);
+    int nType = 0;
+    int nError = Sub_FMInt->Cls_funManagerData_GetType(&dBVerify, &sDType, nType);
+    if (nError != clsFileManager_intErrorCode_Success) return(-1);
+    return(nType);
+}
+
 QString CamelDataManager::cls_funManagerData_GetData(int nRow)
 {
     Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
@@ -446,5 +466,107 @@ int CamelDataManager::cls_funManagerData_Delete(int nRow)
     Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     Cls_stuDataType sDType(-1, nRow+2, nullptr);
     int intError = Sub_FMInt->Cls_funManagerData_Delete(&dBVerify, &sDType);
+    return(intError);
+}
+
+int CamelDataManager::cls_funManagerData_Modify(int nDataType, QString strName, QString strValue)
+{
+    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
+    string sName = strName.toStdString();
+    Cls_stuDataType sDataType(nDataType, -1, sName.c_str());
+    int intError = 0;
+    Cls_lpstuUserData sUserData = nullptr;
+    string strData = "";
+    switch (nDataType) {
+    case 1:
+    {
+        short sData = strValue.toShort();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 2:
+    {
+        int sData = strValue.toInt();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 3:
+    {
+        float sData = strValue.toFloat();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 4:
+    {
+        double sData = strValue.toDouble();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 5:
+    {
+        double sData = strValue.toDouble();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 6:
+    {
+        double sData = strValue.toDouble();
+        sUserData = new Cls_stuUserData(&sData, 0);
+    }
+        break;
+    case 7:
+    {
+        strData = strValue.toLocal8Bit().data();
+        sUserData = new Cls_stuUserData(&strData, 0);
+    }
+        break;
+    case 8:
+    {
+    }
+        break;
+    case 10:
+    {
+    }
+        break;
+    case 11:
+    {
+    }
+        break;
+    case 12:
+    {
+    }
+        break;
+    case 13:
+    {
+    }
+        break;
+    case 14:
+    {
+    }
+        break;
+    case 15:
+    {
+    }
+        break;
+    case 16:
+    {
+    }
+        break;
+    case 17:
+    {
+    }
+        break;
+    default:
+        return (-1);
+    }
+    intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &sDataType, sUserData, true);
+    if (intError == clsFileManager_intErrorCode_Success){
+        int intSize = 0;
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &sDataType, intSize);
+        if (intError == clsFileManager_intErrorCode_Success){
+            m_tableData->update(strName, 2, size2String(intSize));
+        }
+    }
+    if (sUserData != nullptr){delete sUserData;}
     return(intError);
 }
