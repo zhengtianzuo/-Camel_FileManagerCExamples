@@ -55,7 +55,5 @@ private:
     DataListViewModel* m_listData;
     Camel_FileManagerCInterface *Sub_FMInterface;
     Camel_FileManagerCInt* Sub_FMInt;
-    string m_strCurDBName;
-    string m_strCurDBPass;
-    string m_strCurDBPath;
+    Cls_lpstuDBVerify m_dBVerify;
 };

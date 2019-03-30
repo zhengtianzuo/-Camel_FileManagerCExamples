@@ -16,21 +16,19 @@ CamelDataManager::CamelDataManager()
     Sub_FMInt->Cls_funManagerInitialize();
     clsFileManager_CmdMapInit();
     m_tableData = new DataTableViewModel();
-    //    for (int i = 0; i < 100; i++)
-    //    {
-    //        m_tableData->add(QStringLiteral("数据")+QString::number(i), QStringLiteral("文件"), QStringLiteral("1.234M"));
-    //    }
     m_listData = new DataListViewModel();
-    //    for (int i = 0; i < 100; i++)
-    //    {
-    //        m_listData->add(QStringLiteral("名称")+QString::number(i), QStringLiteral("路径"));
-    //    }
 }
 
 CamelDataManager::~CamelDataManager()
 {
     delete m_tableData;
     delete m_listData;
+    if (m_dBVerify){
+        if (m_dBVerify->chrPassword) delete m_dBVerify->chrPassword;
+        if (m_dBVerify->chrDBFileName) delete m_dBVerify->chrDBFileName;
+        delete m_dBVerify;
+        m_dBVerify = nullptr;
+    }
     Sub_FMInterface->Cls_funTerminate(Sub_FMInt);
     delete Sub_FMInterface;
 }
@@ -83,13 +81,10 @@ int CamelDataManager::cls_funManagerDB_CreateDataBase(QString strName, QString s
     string sDBFileName = sAppPath + sDBName + DBSuffix.toStdString();
 
     Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
-    int intError = Sub_FMInt->Cls_funManagerDB_CreateDataBase(&dBVerify, sDBName.c_str(), true);
+    int intError = Sub_FMInt->Cls_funManagerDB_CreateDataBase(m_dBVerify, sDBName.c_str(), true);
     if (intError == clsFileManager_intErrorCode_Success)
     {
         m_listData->add(strName, strPath);
-        m_strCurDBName = sDBName;
-        m_strCurDBPass = sDBPass;
-        m_strCurDBPath = sDBFileName;
     }
     return(intError);
 }
@@ -103,8 +98,20 @@ int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString str
     string sAppPath = strPath.toLocal8Bit().toStdString();
     string sDBFileName = sAppPath + sDBName + DBSuffix.toStdString();
 
-    Cls_stuDBVerify dBVerify(sDBFileName.c_str(), sDBPass.c_str());
-    int intError = Sub_FMInt->Cls_funManagerDB_OpenDataBase(&dBVerify);
+    if (m_dBVerify){
+        if (m_dBVerify->chrPassword) delete m_dBVerify->chrPassword;
+        if (m_dBVerify->chrDBFileName) delete m_dBVerify->chrDBFileName;
+        delete m_dBVerify;
+        m_dBVerify = nullptr;
+    }
+    char* cName = new char[Cls_intFNameSize+1];
+    memset(cName, 0, Cls_intFNameSize+1);
+    strcpy(cName, sDBFileName.c_str());
+    char* cPass = new char[Cls_intFNameSize+1];
+    memset(cPass, 0, Cls_intFNameSize+1);
+    strcpy(cPass, sDBPass.c_str());
+    m_dBVerify = new Cls_stuDBVerify(cName, cPass);
+    int intError = Sub_FMInt->Cls_funManagerDB_OpenDataBase(m_dBVerify);
     if (intError == clsFileManager_intErrorCode_Success)
     {
         int nFileSize = 0;
@@ -117,15 +124,12 @@ int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString str
             nFileSize = static_cast<int>(fileInfo.size());
         }
         m_listData->add(strName, strPath);
-        m_strCurDBName = sDBName;
-        m_strCurDBPass = sDBPass;
-        m_strCurDBPath = sDBFileName;
 
         int nFileNum = 0;
-        Sub_FMInt->Cls_funManagerDB_GetTotalNumber(&dBVerify, nFileNum);
+        Sub_FMInt->Cls_funManagerDB_GetTotalNumber(m_dBVerify, nFileNum);
 
         char chrDBName[Cls_intFNameSize + 1];
-        Sub_FMInt->Cls_funManagerDB_GetName(&dBVerify, chrDBName);
+        Sub_FMInt->Cls_funManagerDB_GetName(m_dBVerify, chrDBName);
 
         emit sOpenDataBase(QString(chrDBName).trimmed(), sDBFileName.c_str(), QString::number(nFileNum), size2String(nFileSize));
     }
@@ -135,16 +139,14 @@ int CamelDataManager::cls_funManagerDB_OpenDataBase(QString strName, QString str
 int CamelDataManager::cls_funManagerDB_SetName(QString strDBName)
 {
     string sDBName = strDBName.toLocal8Bit().toStdString();
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
-    int intError = Sub_FMInt->Cls_funManagerDB_SetName(&dBVerify, sDBName.c_str());
+    int intError = Sub_FMInt->Cls_funManagerDB_SetName(m_dBVerify, sDBName.c_str());
     return(intError);
 }
 
 int CamelDataManager::cls_funManagerDB_ChangePassword(QString strNewPass)
 {
     string sDBPass = strNewPass.toStdString();
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
-    int intError = Sub_FMInt->Cls_funManagerDB_ChangePassword(&dBVerify, m_strCurDBPass.c_str(), sDBPass.c_str());
+    int intError = Sub_FMInt->Cls_funManagerDB_ChangePassword(m_dBVerify, m_dBVerify->chrPassword, sDBPass.c_str());
     return(intError);
 }
 
@@ -216,7 +218,6 @@ QString CamelDataManager::size2String(int nSize)
 int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName, QString strValue)
 {
     nDataType = type2RealType(nDataType);
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     string sName = strName.toStdString();
     Cls_stuDataType sDataType(nDataType, -1, sName.c_str());
     int intError = 0;
@@ -304,10 +305,10 @@ int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName,
     default:
         return (-1);
     }
-    intError = Sub_FMInt->Cls_funManagerData_Combine(&dBVerify, &sDataType, nullptr, sUserData, false, -1);
+    intError = Sub_FMInt->Cls_funManagerData_Combine(m_dBVerify, &sDataType, nullptr, sUserData, false, -1);
     if (intError == clsFileManager_intErrorCode_Success){
         int intSize = 0;
-        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &sDataType, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(m_dBVerify, clsFileManager_intSizeType_DataSize, &sDataType, intSize);
         if (intError == clsFileManager_intErrorCode_Success){
             m_tableData->add(strName, type2String(nDataType), size2String(intSize));
         }
@@ -318,22 +319,21 @@ int CamelDataManager::cls_funManagerData_Combine(int nDataType, QString strName,
 
 int CamelDataManager::cls_funManagerData_GetAllList()
 {
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     Cls_stuFunction funData(&Sub_funManagerData, this);
     vector<string> aryDataNameList;
     Cls_stuUserData userData(&aryDataNameList, -1);
-    int intError = Sub_FMInt->Cls_funManagerData_GetNameList(&dBVerify, clsFileManager_intNameType_Name, &funData, &userData);
+    int intError = Sub_FMInt->Cls_funManagerData_GetNameList(m_dBVerify, clsFileManager_intNameType_Name, &funData, &userData);
     if (intError != clsFileManager_intErrorCode_Success) return(intError);
 
     vector<int> aryDataTypeList;
     Cls_stuUserData userData1(&aryDataTypeList, -1);
-    intError = Sub_FMInt->Cls_funManagerData_GetTypeList(&dBVerify, &funData, &userData1);
+    intError = Sub_FMInt->Cls_funManagerData_GetTypeList(m_dBVerify, &funData, &userData1);
     if (intError != clsFileManager_intErrorCode_Success) return(intError);
     if (aryDataTypeList.size() != aryDataNameList.size()) return (-1);
 
     vector<int> aryDataSizeList;
     Cls_stuUserData userData2(&aryDataSizeList, -1);
-    intError = Sub_FMInt->Cls_funManagerData_GetSizeList(&dBVerify, clsFileManager_intSizeType_DataSize, &funData, &userData2);
+    intError = Sub_FMInt->Cls_funManagerData_GetSizeList(m_dBVerify, clsFileManager_intSizeType_DataSize, &funData, &userData2);
     if (intError != clsFileManager_intErrorCode_Success) return(intError);
     if (aryDataSizeList.size() != aryDataNameList.size()) return (-1);
 
@@ -346,30 +346,27 @@ int CamelDataManager::cls_funManagerData_GetAllList()
 
 QString CamelDataManager::cls_funManagerData_GetName(int nRow)
 {
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     Cls_stuDataType sDType(-1, nRow+2, nullptr);
     char chrDataName[Cls_intFNameSize + 1];
-    int nError = Sub_FMInt->Cls_funManagerData_GetName(&dBVerify, &sDType, clsFileManager_intNameType_Name, chrDataName);
+    int nError = Sub_FMInt->Cls_funManagerData_GetName(m_dBVerify, &sDType, clsFileManager_intNameType_Name, chrDataName);
     if (nError != clsFileManager_intErrorCode_Success) return("");
     return(QString(chrDataName));
 }
 
 int CamelDataManager::cls_funManagerData_GetType(int nRow)
 {
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     Cls_stuDataType sDType(-1, nRow+2, nullptr);
     int nType = 0;
-    int nError = Sub_FMInt->Cls_funManagerData_GetType(&dBVerify, &sDType, nType);
+    int nError = Sub_FMInt->Cls_funManagerData_GetType(m_dBVerify, &sDType, nType);
     if (nError != clsFileManager_intErrorCode_Success) return(-1);
     return(nType);
 }
 
 QString CamelDataManager::cls_funManagerData_GetData(int nRow)
 {
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     Cls_stuDataType sDType(-1, nRow+2, nullptr);
     int nType = 0;
-    int nError = Sub_FMInt->Cls_funManagerData_GetType(&dBVerify, &sDType, nType);
+    int nError = Sub_FMInt->Cls_funManagerData_GetType(m_dBVerify, &sDType, nType);
     if (nError != clsFileManager_intErrorCode_Success) return(QString(""));
     Cls_stuFunction fun(nullptr, nullptr);
     Cls_stuFunction funData(&Sub_funManagerData, this);
@@ -381,7 +378,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     {
         short srtShort = 0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(srtShort), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(m_dBVerify, &sDataType, &fun, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
         return (QString::number(srtShort));
     }
@@ -389,7 +386,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     {
         int intInt = 0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(intInt), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(m_dBVerify, &sDataType, &fun, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
         return (QString::number(intInt));
     }
@@ -397,7 +394,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     {
         float fltFloat = 0.0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(fltFloat), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(m_dBVerify, &sDataType, &fun, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
         return (QString::number(fltFloat));
     }
@@ -406,7 +403,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     {
         double dblDouble = 0.0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(dblDouble), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(m_dBVerify, &sDataType, &fun, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
         return (QString::number(dblDouble));
     }
@@ -415,7 +412,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     {
         double cryCurrency = 0.0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(cryCurrency), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(m_dBVerify, &sDataType, &fun, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
         return (QString::number(cryCurrency));
     }
@@ -424,7 +421,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     {
         double dateTime = 0.0;
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(dateTime), intSize);
-        intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &fun, &getUserData);
+        intError = Sub_FMInt->Cls_funManagerData_Extract(m_dBVerify, &sDataType, &fun, &getUserData);
         QString strTime = QDateTime::fromMSecsSinceEpoch(dateTime).toString("yyyy-MM-dd hh:mm:ss");
         return (strTime);
     }
@@ -433,7 +430,7 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
     {
         string strString = "";
         Cls_stuGetUserData getUserData(reinterpret_cast<void*&>(strString), intSize);
-        int intError = Sub_FMInt->Cls_funManagerData_Extract(&dBVerify, &sDataType, &funData, &getUserData);
+        int intError = Sub_FMInt->Cls_funManagerData_Extract(m_dBVerify, &sDataType, &funData, &getUserData);
         if (intError != clsFileManager_intErrorCode_Success) return(QString(""));
         return (QString::fromLocal8Bit(strString.c_str()));
     }
@@ -463,15 +460,13 @@ QString CamelDataManager::cls_funManagerData_GetData(int nRow)
 
 int CamelDataManager::cls_funManagerData_Delete(int nRow)
 {
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     Cls_stuDataType sDType(-1, nRow+2, nullptr);
-    int intError = Sub_FMInt->Cls_funManagerData_Delete(&dBVerify, &sDType);
+    int intError = Sub_FMInt->Cls_funManagerData_Delete(m_dBVerify, &sDType);
     return(intError);
 }
 
 int CamelDataManager::cls_funManagerData_Modify(int nDataType, QString strName, QString strValue)
 {
-    Cls_stuDBVerify dBVerify(m_strCurDBPath.c_str(), m_strCurDBPass.c_str());
     string sName = strName.toStdString();
     Cls_stuDataType sDataType(nDataType, -1, sName.c_str());
     int intError = 0;
@@ -559,10 +554,10 @@ int CamelDataManager::cls_funManagerData_Modify(int nDataType, QString strName, 
     default:
         return (-1);
     }
-    intError = Sub_FMInt->Cls_funManagerData_Modify(&dBVerify, &sDataType, sUserData, true);
+    intError = Sub_FMInt->Cls_funManagerData_Modify(m_dBVerify, &sDataType, sUserData, true);
     if (intError == clsFileManager_intErrorCode_Success){
         int intSize = 0;
-        intError = Sub_FMInt->Cls_funManagerData_GetSize(&dBVerify, clsFileManager_intSizeType_DataSize, &sDataType, intSize);
+        intError = Sub_FMInt->Cls_funManagerData_GetSize(m_dBVerify, clsFileManager_intSizeType_DataSize, &sDataType, intSize);
         if (intError == clsFileManager_intErrorCode_Success){
             m_tableData->update(strName, 2, size2String(intSize));
         }
