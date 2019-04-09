@@ -7,7 +7,7 @@
 
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelFileManagerCDll/dromedary.png?raw=true)   中文名: 单峰驼
 
-自主研发的分布式数据存储中间件, **非开源** 属于CamelSoft系列基础开发组件. 可以方便快捷的搭建和部署基于分布式存储应用的云端系统, 轻松实现跨区域分布式存储系统.
+自主研发的基于分布式文件存储的NoSQL数据库, **非开源** 属于CamelSoft系列基础开发组件. 可以方便快捷的搭建和部署基于分布式存储应用的云端系统, 轻松实现跨区域分布式存储系统.
 由C++语言编写, 属于非关系数据库
 
 ![](https://img.shields.io/badge/%E7%89%88%E6%9D%83%E8%AE%B8%E5%8F%AF-MIT-orange.svg)
