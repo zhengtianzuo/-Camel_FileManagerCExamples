@@ -45,10 +45,12 @@ CamelFileManagerCTest: 单峰驼测试程序
 # Camel_CrashReport:
 程序异常崩溃时生成Dump文件和日志, **非开源** 属于CamelSoft系列基础开发组件.
 Dump文件是进程的内存镜像。可以把程序的执行状态通过调试器保存到dump文件中。
+
 ![](https://github.com/zhengtianzuo/zhengtianzuo.github.io/blob/master/syswin.png?raw=true)
 
 ***
 CamelCrashReportTest: 崩溃报告开发组件测试程序
+
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelCrashReportTest/show.jpg?raw=true)
 ![](https://github.com/zhengtianzuo/Camel_FileManagerCExamples/blob/master/CamelCrashReportTest/show1.jpg?raw=true)
 异常崩溃时生成的dump文件, 在VisualStudio下调试直接定位到代码行, 当然也可以使用WinDbg调试
