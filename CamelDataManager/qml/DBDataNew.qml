@@ -17,7 +17,14 @@ ApplicationWindow{
 
     property int defaultMargin: 6
 
+    function newLine(){
+        listModel.append({"name":"", "value":""})
+        listModel.sync();
+    }
+
     function showWindow(){
+        listModel.clear();
+        newLine();
         frmWindow.showNormal();
     }
 
@@ -142,8 +149,8 @@ ApplicationWindow{
                 width: 120
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("增加行")
-                onClicked: {
-
+                onSClicked: {
+                    newLine();
                 }
             }
 
@@ -158,16 +165,19 @@ ApplicationWindow{
                     for( var i = 0;i < rowCount;i++ ) {
                         var model = listModel.get(i);
                         if (model.name.length === 0){
-                            message.showMsg(qsTr("请输入数据名称"));
+                            var info = qsTr("请输入第") + (i+1) + qsTr("行数据名称");
+                            message.showMsg(info);
                             return;
                         }
                         if (model.value.length === 0){
-                            message.showMsg(qsTr("请输入数据内容"));
+                            var info1 = qsTr("请输入第") + (i+1) + qsTr("行数据内容");
+                            message.showMsg(info1);
                             return;
                         }
                         var intError = cDataManager.cls_funManagerData_Combine(comboBox.currentIndex, model.name, model.value);
                         if (intError !== 1){
-                            message.showMsg(qsTr("添加数据错误, 错误码: ") + intError);
+                            var info2 = qsTr("添加第") + (i+1) + qsTr("行数据错误, 错误码: " + intError);
+                            message.showMsg(info2);
                             return;
                         }
                     }
@@ -194,15 +204,32 @@ ApplicationWindow{
 
         ListModel {
             id: listModel
-            ListElement { name: ""; value: "" }
         }
 
         Component{
             id: listDelegate
 
             Row{
-                height: 40
+                height: 30+defaultMargin*2
                 width: parent.width
+
+                Rectangle{
+                    height: 30+defaultMargin*2
+                    width: 30+defaultMargin*2
+                    border.color: "#148014"
+                    border.width: 1
+
+                    Text {
+                        height: 32
+                        width: 32
+                        anchors.centerIn: parent
+                        font.family: "Microsoft YaHei"
+                        font.pixelSize: 12
+                        text: model.index+1
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                }
 
                 BaseTextField{
                     id: name
@@ -210,7 +237,7 @@ ApplicationWindow{
                     showText: qsTr("名称:")
                     showWidth: 40
                     inputText: qsTr("")
-                    inputWidth: parent.width/3-showWidth-defaultMargin*3
+                    inputWidth: (parent.width-parent.height)/3-showWidth-defaultMargin*3
                     readOnly: false
                     onSEditingFinished:{
                         listModel.set(model.index, {"name": text})
@@ -226,7 +253,7 @@ ApplicationWindow{
                     showText: qsTr("值:")
                     showWidth: 40
                     inputText: qsTr("")
-                    inputWidth: parent.width/3*2-showWidth-defaultMargin*3
+                    inputWidth: (parent.width-parent.height)/3*2-showWidth-defaultMargin*3
                     readOnly: false
                     onSEditingFinished:{
                         listModel.set(model.index, {"value": text})

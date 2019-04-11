@@ -162,6 +162,13 @@ int CamelDataManager::type2RealType(int nType)
     return(nType);
 }
 
+int CamelDataManager::cls_realType2Type(int realType)
+{
+    realType--;
+    if (realType > 8) realType--;
+    return(realType);
+}
+
 QString CamelDataManager::type2String(int nType)
 {
     switch (nType) {

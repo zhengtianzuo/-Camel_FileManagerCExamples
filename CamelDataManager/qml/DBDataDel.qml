@@ -17,7 +17,11 @@ ApplicationWindow{
 
     property int defaultMargin: 6
 
-    function showWindow(){
+    function showWindow(curName,curType,curValue){
+        name.inputText = curName;
+        var type = cDataManager.cls_realType2Type(curType);
+        comboBox.currentIndex = type;
+        value.inputText = curValue;
         frmWindow.showNormal();
     }
 
@@ -122,6 +126,7 @@ ApplicationWindow{
             width: name.width
             anchors.horizontalCenter: parent.horizontalCenter
             tName.height: 230
+            tName.verticalAlignment: Text.AlignTop
             showText: qsTr("值:")
             showWidth: 40
             inputText: qsTr("")

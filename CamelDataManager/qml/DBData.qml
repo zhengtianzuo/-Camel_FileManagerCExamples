@@ -149,7 +149,11 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("删除")
                 onSClicked: {
-                    dBDataDel.showNormal();
+                    if (curName.length === 0){
+                        message.showMsg(qsTr("请先选择被删除数据."));
+                        return;
+                    }
+                    dBDataDel.showWindow(curName,curType,curValue);
                 }
             }
 
@@ -160,7 +164,7 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 text: qsTr("添加")
                 onSClicked: {
-                    dBDataNew.showNormal();
+                    dBDataNew.showWindow();
                 }
             }
         }

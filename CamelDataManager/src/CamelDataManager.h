@@ -35,6 +35,7 @@ public:
     Q_INVOKABLE QString cls_funManagerData_GetData(int nRow);
     Q_INVOKABLE int cls_funManagerData_Delete(int nRow);
     Q_INVOKABLE int cls_funManagerData_Modify(int nDataType, QString strName, QString strValue);
+    Q_INVOKABLE int cls_realType2Type(int realType);
 
 signals:
     void sOpenDataBase(QString strName, QString strPath, QString strFileNum, QString strFileSize);
@@ -48,6 +49,7 @@ private:
         void *pReturnData, int intReturnSize);
 
     int type2RealType(int nType);
+
     QString type2String(int nType);
     QString size2String(int nSize);
 
