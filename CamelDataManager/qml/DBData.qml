@@ -42,13 +42,13 @@ Rectangle{
                 text: styleData.value
             }
             onClicked: {
-                curValue = cDataManager.cls_funManagerData_GetData(row);
+                curValue = cDataManagerData.cls_funManagerData_GetData(row);
                 if (curValue.length === 0){
                     message.showMsg(qsTr("获取数据错误"));
                     return;
                 }
-                curName = cDataManager.cls_funManagerData_GetName(row);
-                curType = cDataManager.cls_funManagerData_GetType(row);
+                curName = cDataManagerData.cls_funManagerData_GetName(row);
+                curType = cDataManagerData.cls_funManagerData_GetType(row);
                 textEdit.text = curValue;
             }
         }
@@ -104,7 +104,7 @@ Rectangle{
                             message.showMsg(qsTr("数据内容无效"));
                             return;
                         }
-                        cDataManager.cls_funManagerData_Modify(curType, curName, textEdit.text);
+                        cDataManagerData.cls_funManagerData_Modify(curType, curName, textEdit.text);
                     }
                 }
             }

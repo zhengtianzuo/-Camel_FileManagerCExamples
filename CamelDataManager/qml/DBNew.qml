@@ -117,12 +117,12 @@ Rectangle{
                     message.showMsg(qsTr("请输入数据库的路径"));
                     return;
                 }
-                var intError = cDataManager.cls_funManagerDB_CreateDataBase(dbName.inputText, dbPass.inputText, ldbPath.inputText);
+                var intError = cDataManagerDB.cls_funManagerDB_CreateDataBase(dbName.inputText, dbPass.inputText, ldbPath.inputText);
                 if (intError !== 1){
                     message.showMsg(qsTr("创建数据库错误, 错误码: ") + intError);
                     return;
                 }
-                intError = cDataManager.cls_funManagerDB_OpenDataBase(dbName.inputText, dbPass.inputText, ldbPath.inputText);
+                intError = cDataManagerDB.cls_funManagerDB_OpenDataBase(dbName.inputText, dbPass.inputText, ldbPath.inputText);
                 if (intError !== 1){
                     message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
                     return;

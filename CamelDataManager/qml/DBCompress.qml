@@ -55,7 +55,7 @@ Rectangle{
                     anchors.verticalCenter: parent.verticalCenter
                     text: qsTr("分析")
                     onSClicked: {
-                        var intError = cDataManager.cls_funManagerDB_CheckSpace();
+                        var intError = cDataManagerDB.cls_funManagerDB_CheckSpace();
                     }
                 }
 

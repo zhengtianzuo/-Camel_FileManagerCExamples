@@ -174,7 +174,7 @@ ApplicationWindow{
                             message.showMsg(info1);
                             return;
                         }
-                        var intError = cDataManager.cls_funManagerData_Combine(comboBox.currentIndex, model.name, model.value);
+                        var intError = cDataManagerData.cls_funManagerData_Combine(comboBox.currentIndex, model.name, model.value);
                         if (intError !== 1){
                             var info2 = qsTr("添加第") + (i+1) + qsTr("行数据错误, 错误码: " + intError);
                             message.showMsg(info2);

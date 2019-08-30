@@ -17,7 +17,7 @@ ProgressBar {
 	property alias interval: timer.interval
 
 	function isRunning(){
-		return(timer.running)
+		return timer.running
 	}
 
 	function onStart(){

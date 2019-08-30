@@ -27,12 +27,12 @@ Rectangle{
     DBPass{
         id: dBPass
         onSinputText:{
-            var intError = cDataManager.cls_funManagerDB_OpenDataBase("", inputText, ldbPath.inputText);
+            var intError = cDataManagerDB.cls_funManagerDB_OpenDataBase("", inputText, ldbPath.inputText);
             if (intError !== 1){
                 message.showMsg(qsTr("打开数据库错误, 错误码: ") + intError);
                 return;
             }
-            cDataManager.cls_funManagerData_GetAllList();
+            cDataManagerData.cls_funManagerData_GetAllList();
         }
     }
 

@@ -65,7 +65,7 @@ Rectangle {
     }
 
     Connections{
-        target: cDataManager
+        target: cDataManagerDB
         onSOpenDataBase: {
             dbnew.onSOpenDataBase(strName, strPath);
             dbopen.onSOpenDataBase(strName, strPath);

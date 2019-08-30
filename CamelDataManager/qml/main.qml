@@ -163,7 +163,7 @@ ApplicationWindow {
     }
 
     Connections{
-        target: cDataManager
+        target: cDataManagerDB
         onSOpenDataBase: {
             dbOpened = true;
             bar.showTabs(dbOpened);

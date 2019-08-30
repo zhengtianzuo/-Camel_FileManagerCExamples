@@ -19,8 +19,9 @@ ApplicationWindow{
 
     function showWindow(curName,curType,curValue){
         name.inputText = curName;
-        var type = cDataManager.cls_realType2Type(curType);
-        comboBox.currentIndex = type;
+		curType--;
+		if (curType > 8) curType--;
+        comboBox.currentIndex = curType;
         value.inputText = curValue;
         frmWindow.showNormal();
     }
@@ -141,7 +142,7 @@ ApplicationWindow{
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("确定删除")
             onSClicked: {
-                var intError = cDataManager.cls_funManagerData_Delete(comboBox.currentIndex);
+                var intError = cDataManagerData.cls_funManagerData_Delete(comboBox.currentIndex);
                 if (intError !== 1){
                     message.showMsg(qsTr("删除数据错误, 错误码: ") + intError);
                     return;

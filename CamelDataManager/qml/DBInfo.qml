@@ -105,7 +105,7 @@ Rectangle {
     }
 
     Connections{
-        target: cDataManager
+        target: cDataManagerDB
         onSOpenDataBase: {
             dbName.inputText = strName;
             ldbPath.inputText = strPath;
