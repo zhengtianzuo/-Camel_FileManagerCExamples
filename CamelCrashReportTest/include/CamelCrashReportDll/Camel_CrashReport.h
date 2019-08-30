@@ -29,33 +29,8 @@ enum CrashReport_eumParam
 #define Camel_CrashReport_LIB __declspec(dllexport)
 #else
 #define Camel_CrashReport_LIB __declspec(dllimport)
-
-typedef int (*lpCls_funCrashReportInitialize)(void);
-typedef int (*lpCls_funCrashReportTerminate)(void);
 typedef int (*lpCls_funGetException)(PEXCEPTION_POINTERS const pExceptPtrs, WORD const srtParam);
 #endif
-
-/*!
- *@name Cls_funCrashReportInitialize
- *@brief 组件初始化
- *@param[in] 无
- *@return int
- *@see ::CrashReport_eumErrorCode
- *@author 郑天佐
- *@date 2014-5-17
-*/
-extern "C" Camel_CrashReport_LIB int Cls_funCrashReportInitialize(void);
-
-/*!
- *@name Cls_funCrashReportTerminate
- *@brief 组件销毁
- *@param[in] 无
- *@return int
- *@see ::CrashReport_eumErrorCode
- *@author 郑天佐
- *@date 2014-5-17
-*/
-extern "C" Camel_CrashReport_LIB int Cls_funCrashReportTerminate(void);
 
 /*!
  *@name Cls_funGetException
